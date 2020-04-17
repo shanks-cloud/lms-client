@@ -1,0 +1,118 @@
+<div>
+    <h1 align="center" >   Book collection </h1>
+</div>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+<form #userForm="ngForm">
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="ISBN" 
+                            minlength="13" 
+                            maxlength="13" 
+                            name="isbn" 
+                            required ngModel/>
+            </mat-form-field>
+
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Book Title" 
+                            minlength="4" 
+                            maxlength="40" 
+                            name="bookTitle" 
+                            ngModel/>
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="publisher"
+                            minlength="4" 
+                            maxlength="40" 
+                            name="publisher" 
+                            required ngModel/>
+            </mat-form-field> 
+        </mat-tab>
+    </mat-tab-group>
+
+    <br>
+
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Inclusion Date"
+                                [matDatepicker]="datePicker" 
+                                name="inclusionDate"
+                                required ngModel>
+
+                                 <!-- [min]="minDate" 
+                                [max]="maxDate"  -->
+
+                <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+                <mat-datepicker #datePicker></mat-datepicker>
+            </mat-form-field>
+        </mat-tab>
+
+      
+    </mat-tab-group>
+
+    
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+                <input matInput="author" placeholder="Author" 
+                            minlength="4" 
+                            maxlength="30" 
+                            name="author" 
+                            required ngModel/>
+            </mat-form-field>
+        </mat-tab>
+      
+    
+
+    <br>
+
+        <mat-tab>
+            <mat-form-field>
+                <mat-select placeholder="Book Category"
+                            ngModel name="bookCategory" required>
+                            <mat-option *ngFor="let category of categories" 
+                                        [value]="category">
+                                        {{category}}
+                            </mat-option>
+
+                             <!-- [(ngModel)]="city.cityName" -->
+                </mat-select>
+            </mat-form-field>
+        </mat-tab>
+
+    </mat-tab-group>
+
+    <br>
+    <br>
+
+             
+    <mat-tab-group>
+        <mat-tab>
+                <button type="button" class="btn btn-primary fixedbuttoncancel" 
+                                    (click)="onCancel()"> Cancel </button>
+
+                &nbsp;
+
+                <button type="button" class="btn btn-primary fixedbuttonsubmit" 
+                                    [disabled]="userForm.form.invalid" 
+                                    (click)="onSubmit(userForm.value)"> Submit </button>
+        </mat-tab>
+    </mat-tab-group>
+
+</form>

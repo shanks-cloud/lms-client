@@ -1,0 +1,106 @@
+
+
+<head>
+    <title>View all Books</title>
+</head>
+
+
+<body>
+
+<form #userForm="ngForm">
+
+
+<div></div>
+
+    <mat-card *ngIf="msg">
+          <mat-card-content>{{msg}}</mat-card-content>
+    </mat-card>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+
+  <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+  </mat-form-field>
+    
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      
+      <!-- ISBN Column -->
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef > isbn </th>
+           <td mat-cell *matCellDef="let element"> {{element.isbn}} </td>
+      </ng-container>
+    
+      <!-- BookTitle Column -->
+      <ng-container matColumnDef="bookTitle">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Book Title </th>
+            <td mat-cell *matCellDef="let element"> {{element.bookTitle}} </td>
+      </ng-container>
+    
+      <!-- Author Column -->
+      <ng-container matColumnDef="author">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Author </th>
+            <td mat-cell *matCellDef="let element"> {{element.author}} </td>
+      </ng-container>
+
+
+      <!-- Publisher Column -->
+      <ng-container matColumnDef="publisher">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Publisher </th>
+            <td mat-cell *matCellDef="let element"> {{element.publisher}} </td>
+      </ng-container>
+
+
+      <!-- DOJ Column -->
+      <!-- <ng-container matColumnDef="doj">
+        <th mat-header-cell mat-sort-header *matHeaderCellDef> Date-of-join (in MM/DD/YYYY) </th> -->
+        <!-- <td mat-cell *matCellDef="let employees"> {{employees.name}} </td> -->
+        <!-- <td mat-cell *matCellDef="let element"> {{element.doj | date:'MM/d/yyyy'}} </td>
+      </ng-container> -->
+
+
+      <!-- Action Column -->
+      <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef> action </th>
+          <!-- <td mat-cell *matCellDef="let element"> 
+                        <button mat-raised-button color="warn" 
+                        (click)="showEditView(element.id)"> Edit </button> </td> -->
+
+          <td mat-cell *matCellDef="let element"> 
+                    <a (click)="showEditView(element.id)">
+                        <span class="glyphicon glyphicon-edit"></span>
+                    </a>
+                    
+                    &nbsp;
+                    &nbsp;
+
+                    <a (click)="onDelete(element.id)">
+                      <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+          </td>
+      </ng-container>
+
+         
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row (click)="showEditView(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <div>
+      
+        <a (click)="onClick()" class="btn btn-primary fixedbutton">
+          <!-- class="btn btn-info btn-lg fixedbutton" -->
+          <!-- <span class="glyphicon glyphicon-home"></span> Back -->
+          Back
+        </a>
+
+    </div>
+</form>
+</body>
+
+
+
+
+

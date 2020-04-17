@@ -1,0 +1,19 @@
+mat-toolbar {
+    background-color: #198ed2;
+    display: flex;
+}
+
+
+mat-tab a {
+    font-style: normal;
+    font-size: medium;
+    font-family: fantasy;
+    color: white;
+    padding-right: 25px;
+}
+
+
+img{
+    width:50px;
+    height:50px;
+}
