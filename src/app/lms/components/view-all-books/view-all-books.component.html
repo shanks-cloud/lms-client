@@ -87,6 +87,7 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row (click)="showEditView(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
 
     <div>
       
@@ -95,6 +96,7 @@
           <!-- <span class="glyphicon glyphicon-home"></span> Back -->
           Back
         </a>
+       
 
     </div>
 </form>

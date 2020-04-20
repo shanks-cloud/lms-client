@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,8 @@ export class ViewAllBooksComponent implements OnInit {
   msg: string;
 
   @ViewChild(MatSort) sort:MatSort
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   constructor(private bookService: BookService, private router: Router) { }
 
@@ -34,7 +36,7 @@ export class ViewAllBooksComponent implements OnInit {
         this.displayedColumns = ['isbn', 'bookTitle', 'author', 'publisher', 'action'];
         this.dataSource = new MatTableDataSource(this.books);
         this.dataSource.sort = this.sort;
-
+        this.dataSource.paginator= this.paginator;
         if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
             this.msg = "Book added to the collection successfully..";
         }    
