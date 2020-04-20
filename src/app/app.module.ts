@@ -19,6 +19,7 @@ import { DashboardComponent } from './lms/components/dashboard/dashboard.compone
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { BookService } from './lms/services/book.service';
     MatRadioModule,
     MatGridListModule,
     MatToolbarModule,
+    MatPaginatorModule
   ],
   providers: [BookService],
   bootstrap: [AppComponent], 

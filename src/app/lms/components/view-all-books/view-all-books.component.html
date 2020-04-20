@@ -89,6 +89,8 @@
       <tr mat-row (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 
+    <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
+
     <div>
       
         <a (click)="onClick()" class="btn btn-primary fixedbutton">
