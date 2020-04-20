@@ -16,10 +16,10 @@ export class ViewAllBooksComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
   msg: string;
-
-  @ViewChild(MatSort) sort:MatSort
+  isbn: string;
+  
+  @ViewChild(MatSort) sort:MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
 
   constructor(private bookService: BookService, private router: Router) { }
 
@@ -32,13 +32,15 @@ export class ViewAllBooksComponent implements OnInit {
         console.log("data is " + JSON.stringify(data));
         
         this.books = data;
-
+        
         this.displayedColumns = ['isbn', 'bookTitle', 'author', 'publisher', 'action'];
         this.dataSource = new MatTableDataSource(this.books);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator= this.paginator;
+
         if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
-            this.msg = "Book added to the collection successfully..";
+           this.isbn=history.state.isbn;  
+           this.msg = "Book added to the collection successfully..";
         }    
 
 
@@ -53,6 +55,10 @@ export class ViewAllBooksComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  showDetails(row) {
+    console.log(row);
   }
 
 }
