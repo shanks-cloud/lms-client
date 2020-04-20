@@ -1,5 +1,5 @@
 <div>
-    <h1 align="center" >   Book collection </h1>
+    <h1 align="center" >   New book entry </h1>
 </div>
 
 <div></div>
@@ -30,7 +30,7 @@
                             minlength="4" 
                             maxlength="40" 
                             name="bookTitle" 
-                            ngModel/>
+                            required ngModel/>
             </mat-form-field>
         </mat-tab>
 
@@ -78,29 +78,44 @@
             </mat-form-field>
         </mat-tab>
       
-    
-
-    <br>
-
+        
         <mat-tab>
             <mat-form-field>
-                <mat-select placeholder="Book Category"
+                <mat-select class="custom-scroll-bar" placeholder="Book Category"
                             ngModel name="bookCategory" required>
-                            <mat-option *ngFor="let category of categories" 
+                            <mat-option  *ngFor="let category of categories" 
                                         [value]="category">
                                         {{category}}
                             </mat-option>
-
-                             <!-- [(ngModel)]="city.cityName" -->
+                            
                 </mat-select>
             </mat-form-field>
         </mat-tab>
-
     </mat-tab-group>
 
-    <br>
-    <br>
+        <br>
+        <br>
 
+        <mat-tab-group>
+            <mat-tab>
+                <mat-form-field>
+                    <input matInput="bookImageName" placeholder="Select a file to upload"/>
+            
+                    <input type="file" ngModel name="bookImageName"
+                                accept="image/*" (change)="fileUpload($event)" />
+                    
+                    <ng-container class="err" *ngIf="errMsg">
+                            {{errMsg}}
+                    </ng-container>            
+
+                    <img src="{{previewUrl}}"/>
+                </mat-form-field>
+            </mat-tab>
+        </mat-tab-group>
+    
+
+    <br>
+    <br>
              
     <mat-tab-group>
         <mat-tab>

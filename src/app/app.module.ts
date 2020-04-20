@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DataSource } from '@angular/cdk/table';
 
 import { FormsModule} from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -20,7 +19,6 @@ import { DashboardComponent } from './lms/components/dashboard/dashboard.compone
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
-import { ViewAllBooksComponent } from './lms/components/view-all-books/view-all-books.component';
 
 
 @NgModule({
@@ -28,9 +26,8 @@ import { ViewAllBooksComponent } from './lms/components/view-all-books/view-all-
     AppComponent,
     routingComponents,
     TopBarComponent,
-    DashboardComponent,
-    ViewAllBooksComponent,
-  ],
+    DashboardComponent
+   ],
   imports: [
     BrowserModule,
     HttpClientModule,

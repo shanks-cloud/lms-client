@@ -21,12 +21,13 @@ table {
     font-weight: bold;
   }
 
+   
   mat-card-content {
-    top:2px;
-    height:6px;
-    color: green;
-    font-weight: bold;
-    text-align: center;
+       text-align: center;
+  }
+
+  .isbn {
+       background-color: yellow;
   }
 
   form {

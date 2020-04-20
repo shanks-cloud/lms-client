@@ -20,6 +20,7 @@ export class BookService {
     console.log("addBook method called inside service method");
     console.log("payload is.." + JSON.stringify(val));
 
+      
     return this.httpService.post<Book>(this.bookUrl, val);
   }
 
