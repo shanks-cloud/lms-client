@@ -87,17 +87,18 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
 
     <mat-paginator [pageSizeOptions]="[6]" showFirstLastButtons></mat-paginator>
 
     <div>
-
-      <a (click)="onClick()" class="btn btn-primary fixedbutton">
-        <!-- class="btn btn-info btn-lg fixedbutton" -->
-        <!-- <span class="glyphicon glyphicon-home"></span> Back -->
-        Back
-      </a>
-
+      
+        <a (click)="onClick()" class="btn btn-primary fixedbutton">
+          <!-- class="btn btn-info btn-lg fixedbutton" -->
+          <!-- <span class="glyphicon glyphicon-home"></span> Back -->
+          Back
+        </a>
+      
     </div>
-  </form>
+</form>
 </body>
