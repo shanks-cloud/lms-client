@@ -2,24 +2,23 @@
 
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened>
-        
+
         <!-- Sidenav content -->
 
         <mat-list>
-            <mat-list-item> <a [routerLink]="['addBook']"> Add Book </a> </mat-list-item>
+            <!-- <mat-list-item> <a [routerLink]="['addBook']"> Add Book </a> </mat-list-item> -->
+            <mat-list-item> <a [routerLink]="['fetchBook']"> Manage Books </a> </mat-list-item>
             <br>
             <br>
-            <mat-list-item> <a [routerLink]="['viewAllBooks']" > View all Books </a></mat-list-item>
+            <mat-list-item> <a [routerLink]="['viewAllBooks']"> View all Books </a></mat-list-item>
         </mat-list>
 
-     
+
     </mat-sidenav>
-    
+
     <mat-sidenav-content>
 
-            <!-- Main content -->
-                  <router-outlet></router-outlet>
+        <!-- Main content -->
+        <router-outlet></router-outlet>
     </mat-sidenav-content>
 </mat-sidenav-container>
-
-
