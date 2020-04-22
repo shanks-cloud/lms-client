@@ -12,37 +12,46 @@ import { Router } from '@angular/router';
 export class ViewAllBooksComponent implements OnInit {
 
   books = [];
-  newBook=false;
+  newBook = false;
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
   msg: string;
   isbn: string;
-  
-  @ViewChild(MatSort) sort:MatSort;
+
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
 
-      this.bookService.getAllBooks().subscribe(
-        ( data ) => {
-          
+    this.bookService.getAllBooks().subscribe(
+      (data) => {
+
         console.log("inside getAllBooks method..");
         console.log("data is " + JSON.stringify(data));
-        
+
         this.books = data;
-        
+
         this.displayedColumns = ['isbn', 'bookTitle', 'author', 'publisher', 'action'];
         this.dataSource = new MatTableDataSource(this.books);
         this.dataSource.sort = this.sort;
-        this.dataSource.paginator= this.paginator;
+        this.dataSource.paginator = this.paginator;
 
         if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
-           this.isbn=history.state.isbn;  
-           this.msg = "Book added to the collection successfully..";
-        }    
+          this.isbn = history.state.isbn;
+          this.msg = "Book added to the collection successfully..";
+        }
 
+        if ((history.state.componentOrigin === "app-edit-book") && (history.state.editBook === true)) {
+          this.isbn = history.state.isbn;
+          this.msg = "Book edited successfully..";
+        }
+
+        if ((history.state.componentOrigin === "app-delete-book") && (history.state.deleteBook === true)) {
+          this.isbn = history.state.isbn;
+          this.msg = "Book deleted from the collection successfully..";
+        }
 
       });
 
@@ -57,8 +66,16 @@ export class ViewAllBooksComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  showDetails(row) {
+  showDetails(row: any) {
     console.log(row);
+  }
+
+  showEditView(isbn: number) {
+    this.router.navigate(['editBook', isbn]);
+  }
+
+  onDelete(isbn: number) {
+    this.router.navigate(['deleteBook', isbn]);
   }
 
 }

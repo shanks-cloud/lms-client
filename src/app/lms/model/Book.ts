@@ -1,12 +1,12 @@
 import { Binary } from '@angular/compiler';
 
-export class Book{
+export class Book {
     // bookId:number;
-    isbn:number;
-    bookTitle:String;
-    author:String;
-    publisher:String;
-    inclusionDate:String;
-    bookCategory:String;
+    isbn: number;
+    bookTitle: String;
+    author: String;
+    publisher: String;
+    inclusionDate: String;
+    bookCategory: String;
     bookImageName: String;
 }

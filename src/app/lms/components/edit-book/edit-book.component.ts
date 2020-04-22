@@ -1,68 +1,61 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from '../../model/Book';
-import { Router } from '@angular/router';
-
 
 @Component({
-  selector: 'app-add-book',
-  templateUrl: './add-book.component.html',
-  styleUrls: ['./add-book.component.css']
+  selector: 'app-edit-book',
+  templateUrl: './edit-book.component.html',
+  styleUrls: ['./edit-book.component.css']
 })
-
-export class AddBookComponent implements OnInit {
+export class EditBookComponent implements OnInit {
 
   categories = [];
-  submitted: boolean;
-  newBook: boolean;
+  edited: boolean;
+  isbn: number;
+  books = [];
+  editBook: boolean;
   selectedFile: File;
-  previewUrl: string | ArrayBuffer;
   imageType: number;
   errMsg: String;
-  isbn: number;
+  previewUrl: string | ArrayBuffer;
 
   minDate = new Date();
   maxDate = new Date();
   endDate = this.maxDate.getUTCDate();
   startDate = this.minDate.setUTCDate(this.endDate - 31);
 
-  @Input() parentData: any;
-
-  constructor(private bookService: BookService, private router: Router) { }
+  constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-
     this.categories = [
       "Computer Science",
       "Phylosophy",
       "Medical Science",
-      "Art and Living",
-      "Astronomy",
-      "Aviation"
+      "Art and Living"
     ]
 
-    //this.isbn = history.state.isbn;
-    //console.log("isbn inside ngOnInit.." + this.isbn);
+    this.isbn = parseInt(this.route.snapshot.paramMap.get("isbn"));
+    this.fetchBookByIsbn();
 
-    console.log("inside ngOnInit parentData is..." + this.parentData);
   }
 
-  onSubmit(value: Book) {
+  fetchBookByIsbn() {
+    this.bookService.getBookByIsbn(this.isbn).subscribe(data => {
+      this.books = data, console.log("inside getBookbyIsbn:" + JSON.stringify(data));
+    });
+  }
 
-    this.submitted = true;
-    value.bookImageName = this.selectedFile.name;
+  onUpdate(value: Book) {
 
-    //value.isbn = this.isbn;
-    value.isbn = this.parentData;
+    this.edited = true;
+    value.isbn = this.isbn;
 
-    console.log(JSON.stringify(value));
-
-    this.bookService.addBook(value).subscribe(data => {
-      this.router.navigate(['Books/viewAllBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: value.isbn } });
+    this.bookService.updateBook(value, this.isbn).subscribe(data => {
+      this.router.navigate(['Books/viewAllBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
     },
       (error: any) => console.log(error)
     );
-
   }
 
 
@@ -89,8 +82,18 @@ export class AddBookComponent implements OnInit {
     }
   }
 
-  onCancel() {
-    this.router.navigate(['Books']);
-  }
 
+
+
+
+
+
+
+
+
+
+
+  onCancel() {
+    this.router.navigate(['Books/viewAllBooks']);
+  }
 }

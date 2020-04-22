@@ -1,13 +1,16 @@
 <div>
-    <h1 align="center"> New book entry </h1>
+    <h1 align="center">Edit Book </h1>
 </div>
 
-<form #userForm="ngForm">
+
+<form #editForm="ngForm" *ngFor="let book of books">
     <mat-tab-group>
+
+
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder=ISBN value={{parentData}} disabled minlength="13" maxlength="13" name="isbn"
-                    required [(ngModel)]="parentData" />
+                <input matInput placeholder="ISBN" disabled minlength="13" maxlength="13" name="isbn" required
+                    [(ngModel)]="book.isbn" value={{book.isbn}} />
             </mat-form-field>
 
         </mat-tab>
@@ -15,14 +18,14 @@
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="Book Title" minlength="4" maxlength="40" name="bookTitle" required
-                    ngModel />
+                    [(ngModel)]="book.bookTitle" value={{book.bookTitle}} />
             </mat-form-field>
         </mat-tab>
 
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="publisher" minlength="4" maxlength="40" name="publisher" required
-                    ngModel />
+                    [(ngModel)]="book.publisher" value={{book.publisher}} />
             </mat-form-field>
         </mat-tab>
     </mat-tab-group>
@@ -33,40 +36,44 @@
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="Inclusion Date" [min]="minDate" [max]="maxDate"
-                    [matDatepicker]="datePicker" name="inclusionDate" required ngModel>
+                    [matDatepicker]="datePicker" name="inclusionDate" required [(ngModel)]="book.inclusionDate"
+                    value={{book.inclusionDate}}>
+
 
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
             </mat-form-field>
         </mat-tab>
 
-
     </mat-tab-group>
-
 
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
                 <input matInput="author" placeholder="Author" minlength="4" maxlength="30" name="author" required
-                    ngModel />
+                    [(ngModel)]="book.author" value={{book.author}} />
             </mat-form-field>
         </mat-tab>
 
 
+
+        <br>
+
         <mat-tab>
             <mat-form-field>
-                <mat-select class="custom-scroll-bar" placeholder="Book Category" ngModel name="bookCategory" required>
+                <mat-select placeholder="Book Category" [(ngModel)]="book.bookCategory" value={{book.bookCategory}}
+                    name="bookCategory" required>
                     <mat-option *ngFor="let category of categories" [value]="category">
                         {{category}}
                     </mat-option>
 
+                    <!-- [(ngModel)]="city.cityName" -->
                 </mat-select>
             </mat-form-field>
         </mat-tab>
+
     </mat-tab-group>
 
-    <br>
-    <br>
 
     <mat-tab-group>
         <mat-tab>
@@ -84,7 +91,6 @@
         </mat-tab>
     </mat-tab-group>
 
-
     <br>
     <br>
 
@@ -94,8 +100,8 @@
 
             &nbsp;
 
-            <button type="button" class="btn btn-primary fixedbuttonsubmit" [disabled]="userForm.form.invalid"
-                (click)="onSubmit(userForm.value)"> Submit </button>
+            <button type="button" class="btn btn-primary fixedbuttonsubmit" [disabled]="editForm.form.invalid"
+                (click)="onUpdate(editForm.value)"> Update </button>
         </mat-tab>
     </mat-tab-group>
 
