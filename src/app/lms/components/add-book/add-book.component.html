@@ -1,28 +1,36 @@
-<div>
-    <h1 align="center"> New book entry </h1>
-</div>
-
 <form #userForm="ngForm">
+
+    <mat-card *ngIf="msg && !showAddForm">
+        <mat-card-content class="alert alert-warning">
+            {{msg}}
+            <div class="isbn"> <b> isbn : {{isbn}} </b> </div>
+        </mat-card-content>
+    </mat-card>
+
+    <div>
+        <h1 align="center"> New book entry </h1>
+    </div>
+
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder=ISBN value={{parentData}} disabled minlength="13" maxlength="13" name="isbn"
-                    required [(ngModel)]="parentData" />
+                <input matInput placeholder=ISBN (change)="findIsbn($event)" minlength="13" maxlength="13" name="isbn"
+                    style="color: blue; font-weight: bold;" [disabled]="showAddForm" required [(ngModel)]="isbn" />
             </mat-form-field>
 
         </mat-tab>
 
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="Book Title" minlength="4" maxlength="40" name="bookTitle" required
-                    ngModel />
+                <input matInput placeholder="Book Title" minlength="4" maxlength="40" [disabled]="foundFlag"
+                    name="bookTitle" required ngModel />
             </mat-form-field>
         </mat-tab>
 
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="publisher" minlength="4" maxlength="40" name="publisher" required
-                    ngModel />
+                <input matInput placeholder="publisher" minlength="4" maxlength="40" [disabled]="foundFlag"
+                    name="publisher" required ngModel />
             </mat-form-field>
         </mat-tab>
     </mat-tab-group>
@@ -33,7 +41,7 @@
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="Inclusion Date" [min]="minDate" [max]="maxDate"
-                    [matDatepicker]="datePicker" name="inclusionDate" required ngModel>
+                    [matDatepicker]="datePicker" [disabled]="foundFlag" name="inclusionDate" required ngModel>
 
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                 <mat-datepicker #datePicker></mat-datepicker>
@@ -47,15 +55,16 @@
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput="author" placeholder="Author" minlength="4" maxlength="30" name="author" required
-                    ngModel />
+                <input matInput="author" placeholder="Author" minlength="4" maxlength="30" [disabled]="foundFlag"
+                    name="author" required ngModel />
             </mat-form-field>
         </mat-tab>
 
 
         <mat-tab>
             <mat-form-field>
-                <mat-select class="custom-scroll-bar" placeholder="Book Category" ngModel name="bookCategory" required>
+                <mat-select class="custom-scroll-bar" placeholder="Book Category" ngModel [disabled]="foundFlag"
+                    name="bookCategory" required>
                     <mat-option *ngFor="let category of categories" [value]="category">
                         {{category}}
                     </mat-option>
@@ -73,11 +82,12 @@
             <mat-form-field>
                 <input matInput="bookImageName" placeholder="Select a file to upload" />
 
-                <input type="file" ngModel name="bookImageName" accept="image/*" (change)="fileUpload($event)" />
+                <input type="file" id="#uploadFile" ngModel name="bookImageName" [disabled]="foundFlag" accept="image/*"
+                    (change)="fileUpload($event)" />
 
-                <ng-container class="err" *ngIf="errMsg">
+                <mat-label class="err" *ngIf="errMsg">
                     {{errMsg}}
-                </ng-container>
+                </mat-label>
 
                 <img src="{{previewUrl}}" />
             </mat-form-field>

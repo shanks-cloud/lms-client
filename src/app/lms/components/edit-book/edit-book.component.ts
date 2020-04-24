@@ -15,10 +15,7 @@ export class EditBookComponent implements OnInit {
   isbn: number;
   books = [];
   editBook: boolean;
-  selectedFile: File;
-  imageType: number;
-  errMsg: String;
-  previewUrl: string | ArrayBuffer;
+  bookImageName: String;
 
   minDate = new Date();
   maxDate = new Date();
@@ -30,19 +27,26 @@ export class EditBookComponent implements OnInit {
   ngOnInit(): void {
     this.categories = [
       "Computer Science",
-      "Phylosophy",
+      "Philosophy",
       "Medical Science",
       "Art and Living"
     ]
 
     this.isbn = parseInt(this.route.snapshot.paramMap.get("isbn"));
     this.fetchBookByIsbn();
-
   }
 
   fetchBookByIsbn() {
     this.bookService.getBookByIsbn(this.isbn).subscribe(data => {
-      this.books = data, console.log("inside getBookbyIsbn:" + JSON.stringify(data));
+      this.books = data;
+
+      console.log("inside getBookbyIsbn:" + JSON.stringify(data));
+
+      data.forEach((element => {
+        this.bookImageName = element.bookImageName;
+        console.log("book image name inside forEach edit view.." + this.bookImageName);
+      }))
+
     });
   }
 
@@ -51,47 +55,14 @@ export class EditBookComponent implements OnInit {
     this.edited = true;
     value.isbn = this.isbn;
 
+    value.bookImageName = this.bookImageName;
+
     this.bookService.updateBook(value, this.isbn).subscribe(data => {
       this.router.navigate(['Books/viewAllBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
     },
       (error: any) => console.log(error)
     );
   }
-
-
-  fileUpload(event: any) {
-    this.selectedFile = event.target.files[0];
-    console.log(this.selectedFile);
-    console.log(this.selectedFile.type);
-    this.imageType = this.selectedFile.type.search("image/jpeg");
-    console.log("value of image type is.. " + this.imageType);
-
-    if (this.imageType === 0) {
-      this.preview();
-    } else {
-      this.errMsg = "sorry, we do not support this format for file upload..";
-    }
-
-  }
-
-  preview() {
-    var reader = new FileReader();
-    reader.readAsDataURL(this.selectedFile);
-    reader.onload = (_event) => {
-      this.previewUrl = reader.result;
-    }
-  }
-
-
-
-
-
-
-
-
-
-
-
 
   onCancel() {
     this.router.navigate(['Books/viewAllBooks']);

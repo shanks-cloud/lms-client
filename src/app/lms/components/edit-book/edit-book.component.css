@@ -10,13 +10,15 @@
 
 
   .fixedbuttonsubmit {
-    position: relative;
+    position: fixed;
     bottom: 10px;
+    right:20px;
   }
 
   .fixedbuttoncancel {
-    position: relative;
+    position: fixed;
     bottom: 10px;
+    right: 100px;
   }
 
   .err{
@@ -31,7 +33,14 @@
   .custom-scroll-bar::-webkit-scrollbar{
     width: 5px;
   }
+
+  /* .invisible{
+    display:block;
+    visibility: hidden;
+   } */
   
   form {
     margin-left: 12px;
   }
+
+  

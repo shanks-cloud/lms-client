@@ -1,8 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Book } from '../../model/Book';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-add-book',
@@ -20,40 +19,32 @@ export class AddBookComponent implements OnInit {
   imageType: number;
   errMsg: String;
   isbn: number;
+  msg: String;
+  foundFlag: boolean;
+  showAddForm: boolean;
 
   minDate = new Date();
   maxDate = new Date();
   endDate = this.maxDate.getUTCDate();
   startDate = this.minDate.setUTCDate(this.endDate - 31);
 
-  @Input() parentData: any;
-
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
-
     this.categories = [
       "Computer Science",
-      "Phylosophy",
+      "Philosophy",
       "Medical Science",
       "Art and Living",
       "Astronomy",
       "Aviation"
     ]
-
-    //this.isbn = history.state.isbn;
-    //console.log("isbn inside ngOnInit.." + this.isbn);
-
-    console.log("inside ngOnInit parentData is..." + this.parentData);
   }
 
   onSubmit(value: Book) {
-
     this.submitted = true;
     value.bookImageName = this.selectedFile.name;
-
-    //value.isbn = this.isbn;
-    value.isbn = this.parentData;
+    value.isbn = this.isbn;
 
     console.log(JSON.stringify(value));
 
@@ -62,14 +53,14 @@ export class AddBookComponent implements OnInit {
     },
       (error: any) => console.log(error)
     );
-
   }
-
 
   fileUpload(event: any) {
     this.selectedFile = event.target.files[0];
+
     console.log(this.selectedFile);
     console.log(this.selectedFile.type);
+
     this.imageType = this.selectedFile.type.search("image/jpeg");
     console.log("value of image type is.. " + this.imageType);
 
@@ -78,7 +69,6 @@ export class AddBookComponent implements OnInit {
     } else {
       this.errMsg = "sorry, we do not support this format for file upload..";
     }
-
   }
 
   preview() {
@@ -86,6 +76,7 @@ export class AddBookComponent implements OnInit {
     reader.readAsDataURL(this.selectedFile);
     reader.onload = (_event) => {
       this.previewUrl = reader.result;
+      console.log("preview url is " + this.previewUrl);
     }
   }
 
@@ -93,4 +84,25 @@ export class AddBookComponent implements OnInit {
     this.router.navigate(['Books']);
   }
 
+
+  findIsbn(event: any) {
+    console.log("event target value is " + event.target.value);
+    this.isbn = event.target.value;
+
+    this.bookService.getBookByIsbn(this.isbn).subscribe((data) => {
+
+      console.log("data is..." + JSON.stringify(data));
+
+      if (data.length > 0) {
+        data.forEach((element) => {
+          this.isbn = element.isbn;
+          this.msg = "ISBN already exists";
+          this.foundFlag = true;
+        });
+      } else {
+        this.foundFlag = false;
+        this.showAddForm = true;
+      }
+    });
+  }
 }

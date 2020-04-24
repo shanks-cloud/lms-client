@@ -20,8 +20,6 @@ import { DashboardComponent } from './lms/components/dashboard/dashboard.compone
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { EditBookComponent } from './lms/components/edit-book/edit-book.component';
-import { DeleteBookComponent } from './lms/components/delete-book/delete-book.component';
 
 
 @NgModule({

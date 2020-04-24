@@ -9,8 +9,8 @@
 
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="ISBN" disabled minlength="13" maxlength="13" name="isbn" required
-                    [(ngModel)]="book.isbn" value={{book.isbn}} />
+                <input matInput placeholder="ISBN" style="color: blue; font-weight: bold;" disabled minlength="13"
+                    maxlength="13" name="isbn" required [(ngModel)]="book.isbn" value={{book.isbn}} />
             </mat-form-field>
 
         </mat-tab>
@@ -36,8 +36,9 @@
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="Inclusion Date" [min]="minDate" [max]="maxDate"
-                    [matDatepicker]="datePicker" name="inclusionDate" required [(ngModel)]="book.inclusionDate"
-                    value={{book.inclusionDate}}>
+                    [matDatepicker]="datePicker" name="inclusionDate" required [(ngModel)]="book.inclusionDate">
+
+                <!-- value={{book.inclusionDate}} -->
 
 
                 <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
@@ -50,45 +51,23 @@
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput="author" placeholder="Author" minlength="4" maxlength="30" name="author" required
+                <input matInput placeholder="Author" minlength="4" maxlength="30" name="author" required
                     [(ngModel)]="book.author" value={{book.author}} />
             </mat-form-field>
         </mat-tab>
-
-
 
         <br>
 
         <mat-tab>
             <mat-form-field>
-                <mat-select placeholder="Book Category" [(ngModel)]="book.bookCategory" value={{book.bookCategory}}
-                    name="bookCategory" required>
+                <mat-select placeholder="Book Category" [(ngModel)]="book.bookCategory" name="bookCategory" required>
                     <mat-option *ngFor="let category of categories" [value]="category">
                         {{category}}
                     </mat-option>
-
-                    <!-- [(ngModel)]="city.cityName" -->
                 </mat-select>
             </mat-form-field>
         </mat-tab>
 
-    </mat-tab-group>
-
-
-    <mat-tab-group>
-        <mat-tab>
-            <mat-form-field>
-                <input matInput="bookImageName" placeholder="Select a file to upload" />
-
-                <input type="file" ngModel name="bookImageName" accept="image/*" (change)="fileUpload($event)" />
-
-                <ng-container class="err" *ngIf="errMsg">
-                    {{errMsg}}
-                </ng-container>
-
-                <img src="{{previewUrl}}" />
-            </mat-form-field>
-        </mat-tab>
     </mat-tab-group>
 
     <br>
