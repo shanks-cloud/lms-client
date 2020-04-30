@@ -1,23 +1,48 @@
-<!-- <p>employee-side-nav works!</p> -->
-
 <mat-sidenav-container>
     <mat-sidenav #sidenav mode="side" opened>
 
         <!-- Sidenav content -->
-
-        <mat-list>
+        <mat-list *ngIf="url==='Books'">
             <mat-list-item> <a [routerLink]="['addBook']"> Add Book </a> </mat-list-item>
             <br>
             <br>
             <mat-list-item> <a [routerLink]="['viewAllBooks']"> View all Books </a></mat-list-item>
         </mat-list>
 
-
+        <mat-list *ngIf="url==='Catalog'">
+            <mat-list-item> <a [routerLink]="['viewAll']"> View all </a>
+            </mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['computerScience']"> Computer Science </a>
+            </mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['philosophy']"> Philosophy </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['medicalScience']"> Medical Science </a>
+            </mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['artAndLiving']"> Art and Living </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['astronomy']"> Astronomy </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['aviation']"> Aviation </a></mat-list-item>
+        </mat-list>
     </mat-sidenav>
 
     <mat-sidenav-content>
-
         <!-- Main content -->
-        <router-outlet></router-outlet>
+        <router-outlet> </router-outlet>
+
+        <!-- <div class="centerImage">
+            <router-outlet></router-outlet>
+        </div> -->
+
     </mat-sidenav-content>
+
 </mat-sidenav-container>

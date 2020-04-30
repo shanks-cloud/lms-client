@@ -1,0 +1,7 @@
+<p>philosophy works!</p>
+
+<mat-grid-list cols=2 rowHeight="300px">
+    <mat-grid-tile *ngFor="let filePathCategory of filePathCategories" class="thumbnail img">
+        <img src={{filePathCategory}}>
+    </mat-grid-tile>
+</mat-grid-list>

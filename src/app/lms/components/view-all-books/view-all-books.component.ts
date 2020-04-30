@@ -40,7 +40,7 @@ export class ViewAllBooksComponent implements OnInit {
 
         if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
           this.isbn = history.state.isbn;
-          this.msg = "Book added to the collection successfully..";
+          this.msg = "Book added to the collection successfully. Image tagged to ISBN";
         }
 
         if ((history.state.componentOrigin === "app-edit-book") && (history.state.editBook === true)) {
@@ -57,9 +57,9 @@ export class ViewAllBooksComponent implements OnInit {
 
   }
 
-  onClick() {
-    this.router.navigate(['Books']);
-  }
+  // onClick() {
+  //   this.router.navigate(['Books']);
+  // }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -71,11 +71,11 @@ export class ViewAllBooksComponent implements OnInit {
   }
 
   showEditView(isbn: number) {
-    this.router.navigate(['editBook', isbn]);
+    this.router.navigate(['Books/editBook', isbn]);
   }
 
   onDelete(isbn: number) {
-    this.router.navigate(['deleteBook', isbn]);
+    this.router.navigate(['Books/deleteBook', isbn]);
   }
 
 }

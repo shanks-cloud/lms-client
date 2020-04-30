@@ -32,12 +32,12 @@ export class AddBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories = [
-      "Computer Science",
-      "Philosophy",
-      "Medical Science",
-      "Art and Living",
-      "Astronomy",
-      "Aviation"
+      "computerScience",
+      "philosophy",
+      "medicalScience",
+      "artAndLiving",
+      "astronomy",
+      "aviation"
     ]
   }
 
@@ -67,7 +67,7 @@ export class AddBookComponent implements OnInit {
     if (this.imageType === 0) {
       this.preview();
     } else {
-      this.errMsg = "sorry, we do not support this format for file upload..";
+      this.errMsg = "sorry, at the moment we only support .jpg for file upload..";
     }
   }
 
@@ -87,6 +87,7 @@ export class AddBookComponent implements OnInit {
 
   findIsbn(event: any) {
     console.log("event target value is " + event.target.value);
+
     this.isbn = event.target.value;
 
     this.bookService.getBookByIsbn(this.isbn).subscribe((data) => {
@@ -104,5 +105,6 @@ export class AddBookComponent implements OnInit {
         this.showAddForm = true;
       }
     });
+
   }
 }

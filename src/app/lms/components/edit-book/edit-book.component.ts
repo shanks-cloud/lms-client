@@ -26,10 +26,12 @@ export class EditBookComponent implements OnInit {
 
   ngOnInit(): void {
     this.categories = [
-      "Computer Science",
-      "Philosophy",
-      "Medical Science",
-      "Art and Living"
+      "computerScience",
+      "philosophy",
+      "medicalScience",
+      "artAndLiving",
+      "astronomy",
+      "aviation"
     ]
 
     this.isbn = parseInt(this.route.snapshot.paramMap.get("isbn"));

@@ -4,6 +4,8 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,6 +22,7 @@ import { DashboardComponent } from './lms/components/dashboard/dashboard.compone
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoginComponent } from './lms/components/login/login.component';
 
 
 @NgModule({
@@ -28,17 +31,20 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     routingComponents,
     TopBarComponent,
     DashboardComponent,
-
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+
+    AppRoutingModule,
+
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
     MatTableModule,
     MatSortModule,
     MatSidenavModule,

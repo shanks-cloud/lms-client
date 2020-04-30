@@ -1,24 +1,24 @@
 <!-- <p>top-bar works!</p> -->
 
 <mat-toolbar>
-     
+
        <mat-tab-group>
-              
+
               <img src="/assets/images/digital-library.jpg">
-              
+
 
               &nbsp;
               &nbsp;
 
-              
-              <mat-tab label="Catalog"> <a>Catalog</a> </mat-tab>
+
+              <mat-tab label="Catalog"> <a [routerLink]="['Catalog']">Catalog</a> </mat-tab>
 
               <mat-tab label="Books"> <a [routerLink]="['Books']">Books</a> </mat-tab>
 
               <mat-tab label="Members"> <a>Members</a> </mat-tab>
-              
+
               <mat-tab label="Search Books"> <a>Search Books</a> </mat-tab>
-              
+
               <mat-tab label="Reports"> <a>Reports</a> </mat-tab>
        </mat-tab-group>
 

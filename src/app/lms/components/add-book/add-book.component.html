@@ -14,7 +14,7 @@
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder=ISBN (change)="findIsbn($event)" minlength="13" maxlength="13" name="isbn"
+                <input matInput placeholder="ISBN" (change)="findIsbn($event)" minlength="13" maxlength="13" name="isbn"
                     style="color: blue; font-weight: bold;" [disabled]="showAddForm" required [(ngModel)]="isbn" />
             </mat-form-field>
 

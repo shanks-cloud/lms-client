@@ -10,6 +10,7 @@ import { HttpClient } from '@angular/common/http';
 export class BookService {
 
   private bookUrl = 'http://localhost:8080/Books';
+  private catalogUrl = 'http://localhost:8080/Catalog';
 
   constructor(private httpService: HttpClient) { }
 
@@ -36,6 +37,19 @@ export class BookService {
 
   deleteBookByIsbn(isbn: number): Observable<Book[]> {
     return this.httpService.delete<Book[]>(this.bookUrl + '/' + 'deleteBook' + '/' + isbn);
+  }
+
+  fetchAllFilesByCategory(bookCategory: string): Observable<any> {
+    console.log("inside service method...");
+    return this.httpService.get<any>(this.catalogUrl + '/' + bookCategory);
+  }
+
+  fetchAllFiles(): Observable<any> {
+    return this.httpService.get<any>(this.catalogUrl);
+  }
+
+  getNewArrivalsCount(): Observable<number> {
+    return this.httpService.get<number>(this.bookUrl + '/' + 'newArrivalsCount');
   }
 
 }
