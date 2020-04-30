@@ -1,0 +1,15 @@
+<p>login works!</p>
+
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+        <input matInput type="text" formControlName="firstName" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput type="text" formControlName="lastName" required>
+    </mat-form-field>
+
+    <div></div>
+
+    <button type="submit" [disabled]="!loginForm.valid"> Submit </button>
+</form>

@@ -9,13 +9,12 @@ import { HttpClient } from '@angular/common/http';
 
 export class BookService {
 
-  private bookUrl = 'http://localhost:8080/book';
+  private bookUrl = 'http://localhost:8080/Books';
+  private catalogUrl = 'http://localhost:8080/Catalog';
 
-  
   constructor(private httpService: HttpClient) { }
 
-  
-  addBook(val : Book) : Observable<Book> {
+  addBook(val: Book): Observable<Book> {
 
     console.log("addBook method called inside service method");
     console.log("payload is.." + JSON.stringify(val));
@@ -23,17 +22,34 @@ export class BookService {
     return this.httpService.post<Book>(this.bookUrl, val);
   }
 
-
-  // addBook(val : Book) {
-
-  //   console.log("addBook method called inside service method");
-  //   console.log("payload is.." + JSON.stringify(val));
-
-  //   this.httpService.post<Book>(this.bookUrl, val);
-  // }
-
-  getAllBooks():Observable<Book[]> {
+  getAllBooks(): Observable<Book[]> {
     return this.httpService.get<Book[]>(this.bookUrl + '/' + 'viewAllBooks');
+  }
+
+  getBookByIsbn(isbn: any): Observable<Book[]> {
+    return this.httpService.get<Book[]>(this.bookUrl + '/' + 'fetchBook' + '/' + isbn);
+  }
+
+  updateBook(val: Book, isbn: number): Observable<Book> {
+    console.log("edited value is" + JSON.stringify(val));
+    return this.httpService.put<Book>(this.bookUrl + '/' + 'editBook' + '/' + isbn, val);
+  }
+
+  deleteBookByIsbn(isbn: number): Observable<Book[]> {
+    return this.httpService.delete<Book[]>(this.bookUrl + '/' + 'deleteBook' + '/' + isbn);
+  }
+
+  fetchAllFilesByCategory(bookCategory: string): Observable<any> {
+    console.log("inside service method...");
+    return this.httpService.get<any>(this.catalogUrl + '/' + bookCategory);
+  }
+
+  fetchAllFiles(): Observable<any> {
+    return this.httpService.get<any>(this.catalogUrl);
+  }
+
+  getNewArrivalsCount(): Observable<number> {
+    return this.httpService.get<number>(this.bookUrl + '/' + 'newArrivalsCount');
   }
 
 }

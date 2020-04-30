@@ -1,6 +1,6 @@
 mat-sidenav-container {
     height:552px;
-    position: absolute;
+    position: fixed;
     top: 164px;
 }
 
@@ -19,9 +19,33 @@ mat-list-item{
     font-weight: 200;
 }
 
+
+mat-sidenav-content{
+    width: 1168px;
+    background-color: lightcyan;
+}
+
+
 a {
     font-weight: normal;
     padding: 10px 5px;
     font-size: .80em;
     color: white
   }
+
+
+.thumbnail img{
+    height: 180px;
+    width: 140px;
+    border:solid 1px #cccccc;
+}
+
+/* .centerImage {
+    border: 2px solid black;
+    padding: 30px;
+    background: url(src/assets/images/ebboks.jpeg);
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    
+} */

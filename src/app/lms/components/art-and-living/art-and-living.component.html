@@ -1,0 +1,8 @@
+<p>art-and-living works!</p>
+
+<mat-grid-list cols=2 rowHeight="300px">
+    <mat-grid-tile *ngFor="let filePathCategory of filePathCategories" class="thumbnail img">
+        <img src={{filePathCategory}}>
+        <figcaption class="caption"> number of copies </figcaption>
+    </mat-grid-tile>
+</mat-grid-list>

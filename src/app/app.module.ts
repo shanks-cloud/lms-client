@@ -2,16 +2,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DataSource } from '@angular/cdk/table';
 
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule} from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
@@ -20,7 +21,8 @@ import { DashboardComponent } from './lms/components/dashboard/dashboard.compone
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
-import { ViewAllBooksComponent } from './lms/components/view-all-books/view-all-books.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { LoginComponent } from './lms/components/login/login.component';
 
 
 @NgModule({
@@ -29,17 +31,20 @@ import { ViewAllBooksComponent } from './lms/components/view-all-books/view-all-
     routingComponents,
     TopBarComponent,
     DashboardComponent,
-    ViewAllBooksComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+
+    AppRoutingModule,
+
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    FormsModule,
     MatTableModule,
     MatSortModule,
     MatSidenavModule,
@@ -51,9 +56,10 @@ import { ViewAllBooksComponent } from './lms/components/view-all-books/view-all-
     MatRadioModule,
     MatGridListModule,
     MatToolbarModule,
+    MatPaginatorModule
   ],
   providers: [BookService],
-  bootstrap: [AppComponent], 
-  schemas : [CUSTOM_ELEMENTS_SCHEMA]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

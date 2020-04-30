@@ -1,0 +1,46 @@
+
+  mat-tab {
+    margin-right: 14px;
+  }
+
+  mat-form-field{
+    width:300px;
+    margin-right: 20px;
+  }
+
+
+  .fixedbuttonsubmit {
+    position: fixed;
+    bottom: 10px;
+    right:20px;
+  }
+
+  .fixedbuttoncancel {
+    position: fixed;
+    bottom: 10px;
+    right: 100px;
+  }
+
+  .err{
+    color:red;
+  }
+  
+  .custom-scroll-bar{
+    overflow-y:scroll;
+    overflow-x: hidden;
+  }
+
+  .custom-scroll-bar::-webkit-scrollbar{
+    width: 5px;
+  }
+
+  /* .invisible{
+    display:block;
+    visibility: hidden;
+   } */
+  
+  form {
+    margin-left: 12px;
+  }
+
+  

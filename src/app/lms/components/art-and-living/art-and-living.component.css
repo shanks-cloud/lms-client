@@ -1,0 +1,10 @@
+.thumbnail img{
+    height: 180px;
+    width: 140px;
+    border:solid 1px #cccccc;
+}
+
+.caption {
+    /* Make the caption a block so it occupies its own line. */
+    display: block;
+} 
