@@ -4,7 +4,7 @@ mat-sidenav-container {
     top: 164px;
 }
 
-mat-sidenav, mat-sidenav-content {
+mat-sidenav {
     padding:16px;
 }
 

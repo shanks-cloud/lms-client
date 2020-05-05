@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Book } from '../../model/Book';
+import { BookDTO } from '../../model/BookDTO';
 
 @Component({
   selector: 'app-edit-book',
@@ -11,11 +11,14 @@ import { Book } from '../../model/Book';
 export class EditBookComponent implements OnInit {
 
   categories = [];
+  languages = [];
   edited: boolean;
   isbn: number;
   books = [];
   editBook: boolean;
   bookImageName: String;
+  bookArchiveReason: String;
+  archiveFlag: boolean;
 
   minDate = new Date();
   maxDate = new Date();
@@ -34,6 +37,14 @@ export class EditBookComponent implements OnInit {
       "aviation"
     ]
 
+    this.languages = [
+      "English",
+      "French",
+      "German",
+      "Hindi"
+    ];
+
+
     this.isbn = parseInt(this.route.snapshot.paramMap.get("isbn"));
     this.fetchBookByIsbn();
   }
@@ -46,27 +57,37 @@ export class EditBookComponent implements OnInit {
 
       data.forEach((element => {
         this.bookImageName = element.bookImageName;
-        console.log("book image name inside forEach edit view.." + this.bookImageName);
+        this.bookArchiveReason = element.bookArchiveReason;
+        this.archiveFlag = element.archiveFlag;
+
+        console.log("element value of archive reason is...." + element.archiveFlag);
       }))
 
     });
   }
 
-  onUpdate(value: Book) {
+  onUpdate(bookDTO: BookDTO) {
 
     this.edited = true;
-    value.isbn = this.isbn;
+    bookDTO.isbn = this.isbn;
 
-    value.bookImageName = this.bookImageName;
+    bookDTO.bookImageName = this.bookImageName;
+    bookDTO.bookArchiveReason = this.bookArchiveReason;
+    bookDTO.archiveFlag = this.archiveFlag;
 
-    this.bookService.updateBook(value, this.isbn).subscribe(data => {
-      this.router.navigate(['Books/viewAllBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
+    this.bookService.updateBook(bookDTO, this.isbn).subscribe(data => {
+      this.router.navigate(['Books/viewAllActiveBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
+
+      setTimeout(function () {
+        location.reload();
+      }, 3000);
+
     },
       (error: any) => console.log(error)
     );
   }
 
   onCancel() {
-    this.router.navigate(['Books/viewAllBooks']);
+    this.router.navigate(['Books/viewAllActiveBooks']);
   }
 }

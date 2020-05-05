@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule } from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule, MatDialogModule, MAT_RADIO_DEFAULT_OPTIONS, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DATE_LOCALE } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
@@ -23,6 +23,8 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { BookService } from './lms/services/book.service';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { LoginComponent } from './lms/components/login/login.component';
+import { DialogComponent } from './lms/components/dialog/dialog.component';
+
 
 
 @NgModule({
@@ -31,8 +33,11 @@ import { LoginComponent } from './lms/components/login/login.component';
     routingComponents,
     TopBarComponent,
     DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    DialogComponent,
+
   ],
+  entryComponents: [DialogComponent],
   imports: [
     BrowserModule,
     FormsModule,
@@ -56,9 +61,12 @@ import { LoginComponent } from './lms/components/login/login.component';
     MatRadioModule,
     MatGridListModule,
     MatToolbarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
-  providers: [BookService],
+  providers: [BookService, [
+    { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
+  ]],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

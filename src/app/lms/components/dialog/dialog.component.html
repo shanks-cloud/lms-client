@@ -1,0 +1,30 @@
+<h4 mat-dialog-title>
+    <b style="color: red;">
+        Please select a reason for archival
+    </b>
+</h4>
+
+<br>
+<br>
+
+<mat-dialog-content>
+
+    <mat-radio-group required [(ngModel)]="bookArchiveReason" name="bookArchiveReason">
+        <mat-radio-button checked value="lost" color="primary">Lost</mat-radio-button>
+        &nbsp;
+        <mat-radio-button value="damaged">Damaged</mat-radio-button>
+    </mat-radio-group>
+    <!-- {{bookArchiveReason}} -->
+
+</mat-dialog-content>
+
+<br>
+<br>
+
+<mat-dialog-actions>
+
+    <button mat-button mat-dialog-close [mat-dialog-close]="bookArchiveReason" class="mat-raised-button">
+        Confirm </button>
+    <button mat-button (click)="onClick()" class="mat-raised-button"> Cancel</button>
+
+</mat-dialog-actions>

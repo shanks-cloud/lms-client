@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
-import { Book } from '../../model/Book';
+import { BookDTO } from '../../model/BookDTO';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class AddBookComponent implements OnInit {
 
   categories = [];
+  languages = [];
+
   submitted: boolean;
   newBook: boolean;
   selectedFile: File;
@@ -38,18 +40,31 @@ export class AddBookComponent implements OnInit {
       "artAndLiving",
       "astronomy",
       "aviation"
-    ]
+    ];
+
+    this.languages = [
+      "English",
+      "French",
+      "German",
+      "Hindi"
+    ];
+
   }
 
-  onSubmit(value: Book) {
+  onSubmit(bookDTO: BookDTO) {
     this.submitted = true;
-    value.bookImageName = this.selectedFile.name;
-    value.isbn = this.isbn;
+    bookDTO.bookImageName = this.selectedFile.name;
+    bookDTO.isbn = this.isbn;
+    bookDTO.bookArchiveReason = "";
+    bookDTO.archiveFlag = false;
+    bookDTO.bookCopies = 0;
 
-    console.log(JSON.stringify(value));
 
-    this.bookService.addBook(value).subscribe(data => {
-      this.router.navigate(['Books/viewAllBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: value.isbn } });
+
+    console.log(JSON.stringify(bookDTO));
+
+    this.bookService.addBook(bookDTO).subscribe(data => {
+      this.router.navigate(['Books/viewAllActiveBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: bookDTO.isbn } });
     },
       (error: any) => console.log(error)
     );
@@ -99,6 +114,11 @@ export class AddBookComponent implements OnInit {
           this.isbn = element.isbn;
           this.msg = "ISBN already exists";
           this.foundFlag = true;
+
+          setTimeout(function () {
+            location.reload();
+          }, 3000);
+
         });
       } else {
         this.foundFlag = false;

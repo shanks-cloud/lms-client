@@ -13,24 +13,21 @@ import { MedicalScienceComponent } from './lms/components/medical-science/medica
 import { ArtAndLivingComponent } from './lms/components/art-and-living/art-and-living.component';
 import { AstronomyComponent } from './lms/components/astronomy/astronomy.component';
 import { PhilosophyComponent } from './lms/components/philosophy/philosophy.component';
-
+import { ViewAllInactiveBooksComponent } from './lms/components/view-all-inactive-books/view-all-inactive-books.component';
 
 
 const routes: Routes = [
-
   {
     path: 'Books', component: SideNavComponent,
     children: [
       { path: 'addBook', component: AddBookComponent },
-      { path: 'viewAllBooks', component: ViewAllBooksComponent },
+      { path: 'viewAllActiveBooks', component: ViewAllBooksComponent },
       { path: 'editBook/:isbn', component: EditBookComponent },
       { path: 'deleteBook/:isbn', component: DeleteBookComponent },
+      { path: 'viewAllInActiveBooks', component: ViewAllInactiveBooksComponent },
 
     ]
   },
-
-
-
 
   {
     path: 'Catalog', component: SideNavComponent,
@@ -46,12 +43,6 @@ const routes: Routes = [
       // { path: '**', component: PageNotFound }
     ]
   },
-
-  // { path: 'Books/addBook', component: AddBookComponent },
-  // { path: 'Books/viewAllBooks', component: ViewAllBooksComponent },
-  // { path: 'editBook/:isbn', component: EditBookComponent },
-  // { path: 'deleteBook/:isbn', component: DeleteBookComponent },
-
 ]
 
 @NgModule({
@@ -73,5 +64,6 @@ export const routingComponents = [
   MedicalScienceComponent,
   AstronomyComponent,
   PhilosophyComponent,
-  ArtAndLivingComponent
+  ArtAndLivingComponent,
+  ViewAllInactiveBooksComponent
 ]

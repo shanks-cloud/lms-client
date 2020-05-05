@@ -70,6 +70,36 @@
 
     </mat-tab-group>
 
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+
+                <mat-select class="custom-scroll-bar" placeholder="Language" [(ngModel)]="book.lang"
+                    [disabled]="foundFlag" name="lang" required>
+                    <mat-option *ngFor="let lang of languages" [value]="lang">
+                        {{lang}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Price" [disabled]="foundFlag" name="bookPrice" required
+                    [(ngModel)]="book.bookPrice" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Page Count" minlength="2" maxlength="3" [disabled]="foundFlag"
+                    name="pageCount" required [(ngModel)]="book.pageCount" />
+            </mat-form-field>
+        </mat-tab>
+
+    </mat-tab-group>
+
     <br>
     <br>
 
