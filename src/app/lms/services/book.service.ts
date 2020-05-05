@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Book } from '../model/Book';
+import { BookDTO } from '../model/BookDTO';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,39 +8,40 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class BookService {
-
   private bookUrl = 'http://localhost:8080/Books';
   private catalogUrl = 'http://localhost:8080/Catalog';
 
   constructor(private httpService: HttpClient) { }
 
-  addBook(val: Book): Observable<Book> {
-
-    console.log("addBook method called inside service method");
-    console.log("payload is.." + JSON.stringify(val));
-
-    return this.httpService.post<Book>(this.bookUrl, val);
+  addBook(bookDTO: BookDTO): Observable<BookDTO> {
+    console.log("payload is.." + JSON.stringify(bookDTO));
+    return this.httpService.post<BookDTO>(this.bookUrl, bookDTO);
   }
 
-  getAllBooks(): Observable<Book[]> {
-    return this.httpService.get<Book[]>(this.bookUrl + '/' + 'viewAllBooks');
+  getAllBooks(): Observable<BookDTO[]> {
+    return this.httpService.get<BookDTO[]>(this.bookUrl + '/' + 'viewAllBooks');
   }
 
-  getBookByIsbn(isbn: any): Observable<Book[]> {
-    return this.httpService.get<Book[]>(this.bookUrl + '/' + 'fetchBook' + '/' + isbn);
+  getBookByIsbn(isbn: any): Observable<BookDTO[]> {
+    return this.httpService.get<BookDTO[]>(this.bookUrl + '/' + 'fetchBook' + '/' + isbn);
   }
 
-  updateBook(val: Book, isbn: number): Observable<Book> {
-    console.log("edited value is" + JSON.stringify(val));
-    return this.httpService.put<Book>(this.bookUrl + '/' + 'editBook' + '/' + isbn, val);
+  updateBook(bookDTO: BookDTO, isbn: number): Observable<BookDTO> {
+    console.log("edited value is.." + JSON.stringify(bookDTO));
+    return this.httpService.put<BookDTO>(this.bookUrl + '/' + 'editBook' + '/' + isbn, bookDTO);
   }
 
-  deleteBookByIsbn(isbn: number): Observable<Book[]> {
-    return this.httpService.delete<Book[]>(this.bookUrl + '/' + 'deleteBook' + '/' + isbn);
+  archiveBookByIsbn(isbn: number, bookArchiveReason: string): Observable<any> {
+    //return this.httpService.delete<BookDTO[]>(this.bookUrl + '/' + 'deleteBook' + '/' + isbn + '/' + bookDeleteReason);
+    return this.httpService.put<any>(this.bookUrl + '/' + 'archiveBook' + '/' + isbn, bookArchiveReason);
   }
+
+  unArchiveBookByIsbn(isbn: number): Observable<any> {
+    return this.httpService.put<any>(this.bookUrl + '/' + 'unArchiveBook' + '/' + isbn, '');
+  }
+
 
   fetchAllFilesByCategory(bookCategory: string): Observable<any> {
-    console.log("inside service method...");
     return this.httpService.get<any>(this.catalogUrl + '/' + bookCategory);
   }
 
@@ -51,5 +52,4 @@ export class BookService {
   getNewArrivalsCount(): Observable<number> {
     return this.httpService.get<number>(this.bookUrl + '/' + 'newArrivalsCount');
   }
-
 }

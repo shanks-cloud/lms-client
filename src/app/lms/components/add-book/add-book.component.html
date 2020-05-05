@@ -1,36 +1,36 @@
 <form #userForm="ngForm">
 
-    <mat-card *ngIf="msg && !showAddForm">
+    <mat-card *ngIf="msg">
         <mat-card-content class="alert alert-warning">
             {{msg}}
-            <div class="isbn"> <b> isbn : {{isbn}} </b> </div>
+            <div> <span class="isbn"> <b> isbn : {{isbn}} </b> </span> </div>
         </mat-card-content>
     </mat-card>
 
     <div>
-        <h1 align="center"> New book entry </h1>
+        <h1 align="center"> New Book Entry </h1>
     </div>
 
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="ISBN" (change)="findIsbn($event)" minlength="13" maxlength="13" name="isbn"
-                    style="color: blue; font-weight: bold;" [disabled]="showAddForm" required [(ngModel)]="isbn" />
+                    style="color: blue; font-weight: bold;" pattern="[0-9]*" digitOnly required [(ngModel)]="isbn" />
             </mat-form-field>
 
         </mat-tab>
 
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="Book Title" minlength="4" maxlength="40" [disabled]="foundFlag"
-                    name="bookTitle" required ngModel />
+                <input matInput placeholder="Book Title" minlength="4" maxlength="40" pattern="[a-zA-Z ]*$"
+                    [disabled]="foundFlag" name="bookTitle" required ngModel />
             </mat-form-field>
         </mat-tab>
 
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="publisher" minlength="4" maxlength="40" [disabled]="foundFlag"
-                    name="publisher" required ngModel />
+                <input matInput placeholder="publisher" minlength="4" maxlength="40" pattern="[a-zA-Z ]*$"
+                    [disabled]="foundFlag" name="publisher" required ngModel />
             </mat-form-field>
         </mat-tab>
     </mat-tab-group>
@@ -55,8 +55,8 @@
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput="author" placeholder="Author" minlength="4" maxlength="30" [disabled]="foundFlag"
-                    name="author" required ngModel />
+                <input matInput="author" placeholder="Author" minlength="4" maxlength="30" pattern="[a-zA-Z ]*$"
+                    [disabled]="foundFlag" name="author" required ngModel />
             </mat-form-field>
         </mat-tab>
 
@@ -72,6 +72,36 @@
                 </mat-select>
             </mat-form-field>
         </mat-tab>
+    </mat-tab-group>
+
+
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+
+                <mat-select class="custom-scroll-bar" placeholder="Language" ngModel [disabled]="foundFlag" name="lang"
+                    required>
+                    <mat-option *ngFor="let lang of languages" [value]="lang">
+                        {{lang}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Price" [disabled]="foundFlag" name="bookPrice" required ngModel />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Page Count" minlength="2" maxlength="3" [disabled]="foundFlag"
+                    name="pageCount" required ngModel />
+            </mat-form-field>
+        </mat-tab>
+
     </mat-tab-group>
 
     <br>

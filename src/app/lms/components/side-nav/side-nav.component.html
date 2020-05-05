@@ -6,7 +6,16 @@
             <mat-list-item> <a [routerLink]="['addBook']"> Add Book </a> </mat-list-item>
             <br>
             <br>
-            <mat-list-item> <a [routerLink]="['viewAllBooks']"> View all Books </a></mat-list-item>
+            <mat-list-item> <a [routerLink]="['viewAllActiveBooks']"> View all Active Books </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a> Issued Books </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a> Returned Books </a></mat-list-item>
+            <br>
+            <br>
+            <mat-list-item> <a [routerLink]="['viewAllInActiveBooks']"> View all Inactive Books </a></mat-list-item>
         </mat-list>
 
         <mat-list *ngIf="url==='Catalog'">

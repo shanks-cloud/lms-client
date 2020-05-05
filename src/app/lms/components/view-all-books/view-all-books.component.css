@@ -1,35 +1,32 @@
+form {
+  margin-left: 12px;
+}
 
-/* Structure */
 table {
-    width: 100%;
-    margin-right: auto;
-  }
+  width: 100%;
+  margin-right: auto;
+}
   
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
 
-  .fixedbutton {
-    position: fixed;
-    bottom: 10px;
-    right: 20px;
-  }
+.fixedbutton {
+  position: fixed;
+  bottom: 10px;
+  right: 20px;
+}
 
-  .mat-header-cell{
-    color:blue;
-    font-weight: bold;
-  }
+.mat-header-cell{
+  color:blue;
+  font-weight: bold;
+}
 
-   
-  mat-card-content {
-    text-align: center;
-  }
+.isbn {
+  background-color: yellow;
+}
 
-  .isbn {
-    background-color: yellow;
-  }
-
-  form {
-    margin-left: 12px;
-  }
+mat-card-content {
+  text-align: center;
+}

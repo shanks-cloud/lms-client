@@ -4,12 +4,11 @@ import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-view-all-books',
-  templateUrl: './view-all-books.component.html',
-  styleUrls: ['./view-all-books.component.css']
+  selector: 'app-view-all-inactive-books',
+  templateUrl: './view-all-inactive-books.component.html',
+  styleUrls: ['./view-all-inactive-books.component.css']
 })
-
-export class ViewAllBooksComponent implements OnInit {
+export class ViewAllInactiveBooksComponent implements OnInit {
 
   books = [];
   newBook = false;
@@ -29,37 +28,27 @@ export class ViewAllBooksComponent implements OnInit {
       (data) => {
 
         console.log("inside getAllBooks method..");
-        console.log("active data is " + JSON.stringify(data));
+        console.log("inactive data is " + JSON.stringify(data));
 
         data.forEach((element) => {
-          if (element.archiveFlag === false) {
+          if (element.archiveFlag === true) {
             this.books.push(element);
           }
         });
 
-        this.displayedColumns = ['isbn', 'bookTitle', 'author', 'publisher', 'action'];
+
+        this.displayedColumns = ['isbn', 'bookTitle', 'author', 'publisher', 'bookArchiveReason', 'action'];
+
+        console.log("value of this.books... " + JSON.stringify(this.books));
+
         this.dataSource = new MatTableDataSource(this.books);
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
 
       });
 
-
-    if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
-      this.isbn = history.state.isbn;
-      this.msg = "Book added to the collection successfully. Image tagged to ISBN";
-    }
-
-    if ((history.state.componentOrigin === "app-edit-book") && (history.state.editBook === true)) {
-      this.isbn = history.state.isbn;
-      this.msg = "Book edited successfully..";
-    }
-
-    if ((history.state.componentOrigin === "app-delete-book") && (history.state.archiveBook === true)) {
-      this.isbn = history.state.isbn;
-      this.msg = "Book archived from the collection successfully..";
-    }
   }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -70,12 +59,10 @@ export class ViewAllBooksComponent implements OnInit {
     console.log(row);
   }
 
-  showEditView(isbn: number) {
-    this.router.navigate(['Books/editBook', isbn]);
-  }
+  moveToActiveView(isbn: number) {
+    this.bookService.unArchiveBookByIsbn(isbn).subscribe((data) => {
+      this.router.navigate(['Books/viewAllActiveBooks']);
+    })
 
-  onDelete(isbn: number) {
-    this.router.navigate(['Books/deleteBook', isbn]);
   }
-
 }
