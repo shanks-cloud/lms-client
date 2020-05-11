@@ -46,7 +46,7 @@ export class PreLoginComponent implements OnInit {
       this.loginSuccess = true;
       this.successMessage = 'Login Successful.';
 
-      this.router.navigate(['home']);
+      this.router.navigate(['/home']);
 
     })
   }
@@ -54,7 +54,7 @@ export class PreLoginComponent implements OnInit {
 
   onSignIn() {
     this.authService.authenticationService(this.loginForm.get('emailId').value, this.loginForm.get('password').value).subscribe((data => {
-      this.router.navigate(['home']);
+      this.router.navigate(['/home']);
     }))
   }
 

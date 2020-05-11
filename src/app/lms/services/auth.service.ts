@@ -7,8 +7,8 @@ import { map } from 'rxjs/operators';
 })
 export class AuthService {
 
-  // BASE_PATH: 'http://localhost:8080'
-  USER_NAME_SESSION_ATTRIBUTE_NAME = 'authenticatedUser';
+  BASE_PATH: string = 'http://localhost:8080/home';
+  USER_NAME_SESSION_ATTRIBUTE_NAME: string = 'authenticatedUser';
 
   usrname: string;
   pswd: string;
@@ -24,10 +24,11 @@ export class AuthService {
     }
 
 
-    return this.http.get('http://localhost:8080/home', httpOptions).pipe(map((res) => {
+    return this.http.get(this.BASE_PATH + '/' + "basicauth", httpOptions).pipe(map((resp) => {
       this.usrname = username;
       this.pswd = password;
       this.registerSuccessfulLogin(username, password);
+      console.log("response is " + resp);
     }));
 
   }
