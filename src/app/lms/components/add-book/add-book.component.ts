@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { BookDTO } from '../../model/BookDTO';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-add-book',
@@ -24,6 +25,9 @@ export class AddBookComponent implements OnInit {
   msg: String;
   foundFlag: boolean;
   showAddForm: boolean;
+
+  dispIsbn: number;
+
 
   minDate = new Date();
   maxDate = new Date();
@@ -52,6 +56,7 @@ export class AddBookComponent implements OnInit {
   }
 
   onSubmit(bookDTO: BookDTO) {
+
     this.submitted = true;
     bookDTO.bookImageName = this.selectedFile.name;
     bookDTO.isbn = this.isbn;
@@ -60,11 +65,10 @@ export class AddBookComponent implements OnInit {
     bookDTO.bookCopies = 0;
 
 
-
     console.log(JSON.stringify(bookDTO));
 
     this.bookService.addBook(bookDTO).subscribe(data => {
-      this.router.navigate(['Books/viewAllActiveBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: bookDTO.isbn } });
+      this.router.navigate(['home/books/viewAllActiveBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: bookDTO.isbn } });
     },
       (error: any) => console.log(error)
     );
@@ -96,11 +100,11 @@ export class AddBookComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['Books']);
+    this.router.navigate(['home/books/viewAllActiveBooks']);
   }
 
 
-  findIsbn(event: any) {
+  findIsbn(event: any, userForm: NgForm) {
     console.log("event target value is " + event.target.value);
 
     this.isbn = event.target.value;
@@ -111,12 +115,22 @@ export class AddBookComponent implements OnInit {
 
       if (data.length > 0) {
         data.forEach((element) => {
-          this.isbn = element.isbn;
+
+          //this.isbn = element.isbn;
+          this.dispIsbn = element.isbn;
+
           this.msg = "ISBN already exists";
           this.foundFlag = true;
 
-          setTimeout(function () {
-            location.reload();
+          // setTimeout(function() {
+          //location.reload();
+          //   this.msg = "";
+          //   this.foundFlag = false;
+          // }, 3000);
+
+          setTimeout(() => {
+            this.foundFlag = false;
+            userForm.reset();
           }, 3000);
 
         });
@@ -127,4 +141,7 @@ export class AddBookComponent implements OnInit {
     });
 
   }
+
+
+
 }

@@ -3,3 +3,7 @@
     width: 140px;
     border:solid 1px #cccccc;
 }
+
+.mat-grid-tile{
+    background-color: lightcyan;
+}

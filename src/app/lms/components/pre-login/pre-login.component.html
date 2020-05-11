@@ -1,0 +1,38 @@
+<div class="centerImage">
+
+    <form [formGroup]="loginForm">
+
+        <div class=" loginAlignment" style="float: right;">
+            <input type="text" placeholder="email" formControlName="emailId" required>
+            &nbsp;
+            <input type="password" placeholder="password" formControlName="password" required>
+            &nbsp;
+            <button class="btn btn-primary" type="submit" [disabled]="!loginForm.valid" (click)="onSignIn()"> Sign in
+            </button>
+        </div>
+    </form>
+
+
+    <form [formGroup]="registerForm" style="float: right;">
+
+        <div class="registerAlignment">
+            <h1> <span class="regLbl">New here? please regisgter </span></h1>
+
+            <input type="text" placeholder="Firstname" formControlName="firstName" />
+            &nbsp;
+            <input type="text" placeholder="Lastname" formControlName="lastName" />
+
+            <br>
+
+            <input type="text" placeholder="Aadhaar #" max=10 pattern="[0-9]*" digitOnly required
+                formControlName="memberId" />
+            &nbsp;
+            <input type="text" placeholder="Email ID" formControlName="emailId" />
+            &nbsp;
+            <input type="password" placeholder="Password" formControlName="password" />
+
+            <button class="fixedButtonRegister btn btn-primary" (click)="onRegister()"> Sign up </button>
+        </div>
+
+    </form>
+</div>

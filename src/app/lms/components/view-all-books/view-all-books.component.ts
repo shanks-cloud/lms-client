@@ -17,6 +17,8 @@ export class ViewAllBooksComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   msg: string;
   isbn: string;
+  msgFlag: boolean;
+
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -24,6 +26,8 @@ export class ViewAllBooksComponent implements OnInit {
   constructor(private bookService: BookService, private router: Router) { }
 
   ngOnInit(): void {
+
+    this.msgFlag = false;
 
     this.bookService.getAllBooks().subscribe(
       (data) => {
@@ -47,18 +51,10 @@ export class ViewAllBooksComponent implements OnInit {
 
     if ((history.state.componentOrigin === "app-add-book") && (history.state.newBook === true)) {
       this.isbn = history.state.isbn;
+      this.msgFlag = true;
       this.msg = "Book added to the collection successfully. Image tagged to ISBN";
     }
 
-    if ((history.state.componentOrigin === "app-edit-book") && (history.state.editBook === true)) {
-      this.isbn = history.state.isbn;
-      this.msg = "Book edited successfully..";
-    }
-
-    if ((history.state.componentOrigin === "app-delete-book") && (history.state.archiveBook === true)) {
-      this.isbn = history.state.isbn;
-      this.msg = "Book archived from the collection successfully..";
-    }
   }
 
   applyFilter(event: Event) {
@@ -71,11 +67,11 @@ export class ViewAllBooksComponent implements OnInit {
   }
 
   showEditView(isbn: number) {
-    this.router.navigate(['Books/editBook', isbn]);
+    this.router.navigate(['home/books/editBook', isbn]);
   }
 
-  onDelete(isbn: number) {
-    this.router.navigate(['Books/deleteBook', isbn]);
+  onArchive(isbn: number) {
+    this.router.navigate(['home/books/archiveBook', isbn]);
   }
 
 }

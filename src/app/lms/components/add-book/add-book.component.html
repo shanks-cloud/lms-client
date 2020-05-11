@@ -1,9 +1,11 @@
 <form #userForm="ngForm">
-
-    <mat-card *ngIf="msg">
+    <!-- <mat-card *ngIf="msg"> -->
+    <mat-card *ngIf="foundFlag">
         <mat-card-content class="alert alert-warning">
             {{msg}}
-            <div> <span class="isbn"> <b> isbn : {{isbn}} </b> </span> </div>
+            <!-- <div> <span class="isbn"> <b> isbn : {{isbn}} </b> </span> </div> -->
+            <div> <span class="isbn"> <b> isbn : {{dispIsbn}} </b> </span> </div>
+
         </mat-card-content>
     </mat-card>
 
@@ -14,8 +16,9 @@
     <mat-tab-group>
         <mat-tab>
             <mat-form-field>
-                <input matInput placeholder="ISBN" (change)="findIsbn($event)" minlength="13" maxlength="13" name="isbn"
-                    style="color: blue; font-weight: bold;" pattern="[0-9]*" digitOnly required [(ngModel)]="isbn" />
+                <input matInput placeholder="ISBN" (change)="findIsbn($event, userForm)" minlength="13" maxlength="13"
+                    name="isbn" style="color: blue; font-weight: bold;" pattern="[0-9]*" digitOnly required
+                    [(ngModel)]="isbn" />
             </mat-form-field>
 
         </mat-tab>

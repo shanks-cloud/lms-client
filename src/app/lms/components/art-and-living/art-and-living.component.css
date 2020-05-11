@@ -7,4 +7,8 @@
 .caption {
     /* Make the caption a block so it occupies its own line. */
     display: block;
-} 
+}
+
+.mat-grid-tile{
+    background-color: lightcyan;
+}

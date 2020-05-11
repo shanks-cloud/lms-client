@@ -5,24 +5,27 @@ mat-sidenav-container {
 }
 
 mat-sidenav {
+    background-color: #198ed2;
+    width:250px;
     padding:16px;
 }
 
-mat-sidenav {
-    background-color: #198ed2;
-    width:200px;
-}
-
-mat-list-item{
+mat-list-item {
     font: menu;
-    font-size: medium;
+    font-size: large;
     font-weight: 200;
+    padding-left: 10px;
 }
 
 
 mat-sidenav-content{
-    width: 1168px;
+    width: 1310px;
     background-color: lightcyan;
+}
+
+mat-slide-toggle {
+    font-style: normal;
+    font-size: x-large;
 }
 
 
@@ -40,12 +43,8 @@ a {
     border:solid 1px #cccccc;
 }
 
-/* .centerImage {
-    border: 2px solid black;
-    padding: 30px;
-    background: url(src/assets/images/ebboks.jpeg);
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center;
-    
-} */
+
+img {
+    height: 35px;
+    width: 35px;
+}

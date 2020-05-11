@@ -8,7 +8,7 @@
 
     <h1 align="center">Active List</h1>
 
-    <mat-card *ngIf="msg">
+    <mat-card *ngIf="msgFlag">
       <mat-card-content class="alert alert-success"> {{msg}}
         <div> <span class="isbn"> <b> isbn : {{isbn}} </b> </span> </div>
       </mat-card-content>
@@ -21,7 +21,7 @@
 
     <mat-form-field>
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium">
+      <input matInput (keyup)="applyFilter($event)" placeholder="Search Books">
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -67,7 +67,7 @@
           &nbsp;
           &nbsp;
 
-          <a (click)="onDelete(element.isbn)">
+          <a (click)="onArchive(element.isbn)">
             <!-- <span class="glyphicon glyphicon-remove"></span> -->
             <span class="glyphicon glyphicon-folder-close"></span>
           </a>

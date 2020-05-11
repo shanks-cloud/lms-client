@@ -2,11 +2,19 @@
     <mat-sidenav #sidenav mode="side" opened>
 
         <!-- Sidenav content -->
-        <mat-list *ngIf="url==='Books'">
-            <mat-list-item> <a [routerLink]="['addBook']"> Add Book </a> </mat-list-item>
+        <mat-list *ngIf="url==='books'">
+            <mat-list-item>
+                <a [routerLink]="['addBook']"> <img src="\assets\images\addBook.png" />
+                    <span style="color: white;"> Add Book </span>
+                </a>
+            </mat-list-item>
             <br>
             <br>
-            <mat-list-item> <a [routerLink]="['viewAllActiveBooks']"> View all Active Books </a></mat-list-item>
+            <mat-list-item>
+                <a [routerLink]="['viewAllActiveBooks']"> <img src="\assets\images\allBooks.png" />
+                    <span style="color: white;"> Active Books </span>
+                </a>
+            </mat-list-item>
             <br>
             <br>
             <mat-list-item> <a> Issued Books </a></mat-list-item>
@@ -18,7 +26,7 @@
             <mat-list-item> <a [routerLink]="['viewAllInActiveBooks']"> View all Inactive Books </a></mat-list-item>
         </mat-list>
 
-        <mat-list *ngIf="url==='Catalog'">
+        <mat-list *ngIf="url==='catalog'">
             <mat-list-item> <a [routerLink]="['viewAll']"> View all </a>
             </mat-list-item>
             <br>
@@ -44,8 +52,12 @@
         </mat-list>
     </mat-sidenav>
 
-    <mat-sidenav-content>
+    <mat-sidenav-content class="centerImage">
         <!-- Main content -->
+
+        <mat-slide-toggle *ngIf="url==='books/viewAllActiveBooks'">Active list</mat-slide-toggle>
+
+
         <router-outlet> </router-outlet>
 
         <!-- <div class="centerImage">

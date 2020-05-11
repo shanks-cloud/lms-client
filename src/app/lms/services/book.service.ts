@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BookDTO } from '../model/BookDTO';
-import { Observable } from 'rxjs';
+import { Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +13,7 @@ export class BookService {
   private bookUrl = 'http://localhost:8080/Books';
   private catalogUrl = 'http://localhost:8080/Catalog';
 
-  constructor(private httpService: HttpClient) { }
+  constructor(private httpService: HttpClient, authService: AuthService) { }
 
   addBook(bookDTO: BookDTO): Observable<BookDTO> {
     console.log("payload is.." + JSON.stringify(bookDTO));

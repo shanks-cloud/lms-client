@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-view-all-inactive-books',
@@ -15,7 +16,8 @@ export class ViewAllInactiveBooksComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
   msg: string;
-  isbn: string;
+  msgFlag: boolean;
+  isbn: number;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -61,8 +63,17 @@ export class ViewAllInactiveBooksComponent implements OnInit {
 
   moveToActiveView(isbn: number) {
     this.bookService.unArchiveBookByIsbn(isbn).subscribe((data) => {
-      this.router.navigate(['Books/viewAllActiveBooks']);
-    })
+      this.msgFlag = true;
+      this.msg = "Book moved to active collection.";
+      this.isbn = isbn;
 
+      setTimeout(() => {
+        this.msgFlag = false;
+      }, 3000);
+
+      // setTimeout(() => {
+      this.router.navigate(['home/books/viewAllActiveBooks']);
+      // }, 3000);
+    })
   }
 }

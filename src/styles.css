@@ -22,9 +22,10 @@
   }
   
   router-outlet + *  {
-    padding: 0 16px;
+    padding: 0px;
   }
-  
+
+ 
   /* Text */
   
   h1 {

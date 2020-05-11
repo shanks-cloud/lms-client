@@ -1,0 +1,96 @@
+<h1 align="center">Profile</h1>
+
+<form [formGroup]="profileForm">
+
+    <mat-tab-group>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Member ID" type="text" formControlName="memberId" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="First Name" type="text" formControlName="firstName" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Middle Name" type="text" formControlName="middleName" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Last Name" type="text" formControlName="lastName" />
+            </mat-form-field>
+        </mat-tab>
+    </mat-tab-group>
+
+    <mat-tab-group>
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Mobile Number" type="text" formControlName="mobileNumber">
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Email ID" type="text" formControlName="emailId" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Address Line #1" type="text" formControlName="addressLine1" />
+            </mat-form-field>
+        </mat-tab>
+
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Address line #2" type="text" formControlName="addressLine2" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <mat-select placeholder="State" formControlName="state">
+                    <mat-option *ngFor="let state of states" [value]="state">
+                        {{state}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-tab>
+
+
+        <mat-tab>
+            <mat-form-field>
+                <mat-select placeholder="City" formControlName="city">
+                    <mat-option *ngFor="let city of cities" [value]="city">
+                        {{city}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </mat-tab>
+
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="ZIP" type="text" formControlName="zip" />
+            </mat-form-field>
+        </mat-tab>
+
+        <mat-tab>
+            <mat-form-field>
+                <input matInput placeholder="Country" type="text" formControlName="country" />
+            </mat-form-field>
+        </mat-tab>
+    </mat-tab-group>
+
+    <button mat-raised-button class="fixedButtonRegister" (click)="onSubmit()"> Submit </button>
+    <button mat-raised-button class="fixedButtonCancel" (click)="onCancel()"> Cancel </button>
+
+</form>

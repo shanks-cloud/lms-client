@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+// import { MatMenuTrigger } from '@angular/material';
 
 @Component({
   selector: 'app-top-bar',
@@ -6,12 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./top-bar.component.css']
 })
 
+
 export class TopBarComponent implements OnInit {
+  // @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   constructor() { }
 
   ngOnInit(): void {
-
+    // this.trigger.openMenu();
   }
 
 }
