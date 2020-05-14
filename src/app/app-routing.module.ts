@@ -17,12 +17,14 @@ import { ViewAllInactiveBooksComponent } from './lms/components/view-all-inactiv
 import { ProfileComponent } from './lms/components/profile/profile.component';
 import { HomeComponent } from './lms/components/home/home.component';
 import { PreLoginComponent } from './lms/components/pre-login/pre-login.component';
+import { DashboardComponent } from './lms/components/dashboard/dashboard.component';
 
 
 const routes: Routes = [
 
   { path: 'profile', component: ProfileComponent },
   { path: '', component: PreLoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
   //{ path: '**', component: PageNotFound }
 
   {
@@ -80,5 +82,6 @@ export const routingComponents = [
   ViewAllInactiveBooksComponent,
   ProfileComponent,
   HomeComponent,
-  PreLoginComponent
+  PreLoginComponent,
+  DashboardComponent
 ]

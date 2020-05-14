@@ -23,7 +23,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-          'Authorization': `Basic ${window.btoa(this.authService.usrname + ":" + this.authService.pswd)}`,
+          'Authorization': `Basic ${window.btoa(this.authService.eId + ":" + this.authService.pswd)}`,
         })
       });
       return next.handle(authReq);

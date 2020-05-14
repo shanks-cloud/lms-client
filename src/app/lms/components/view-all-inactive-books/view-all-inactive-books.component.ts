@@ -49,6 +49,18 @@ export class ViewAllInactiveBooksComponent implements OnInit {
 
       });
 
+
+    if (history.state.componentOrigin === "app-archive-book") {
+      this.isbn = history.state.isbn;
+      this.msgFlag = true;
+      this.msg = "Book archived successfully";
+
+      setTimeout(() => {
+        this.msgFlag = false;
+      }, 6000);
+
+    }
+
   }
 
 
@@ -63,17 +75,10 @@ export class ViewAllInactiveBooksComponent implements OnInit {
 
   moveToActiveView(isbn: number) {
     this.bookService.unArchiveBookByIsbn(isbn).subscribe((data) => {
-      this.msgFlag = true;
-      this.msg = "Book moved to active collection.";
-      this.isbn = isbn;
 
-      setTimeout(() => {
-        this.msgFlag = false;
-      }, 3000);
-
-      // setTimeout(() => {
-      this.router.navigate(['home/books/viewAllActiveBooks']);
-      // }, 3000);
+      this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+        this.router.navigate(['home/books/viewAllActiveBooks'], { state: { componentOrigin: "app-view-all-inactive-books", isbn: isbn } });
+      });
     })
   }
 }

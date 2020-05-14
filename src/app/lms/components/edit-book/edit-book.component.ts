@@ -93,10 +93,13 @@ export class EditBookComponent implements OnInit {
       setTimeout(() => {
         this.msgFlag = false;
         editForm.reset();
-      }, 3000);
+      }, 6000);
 
       setTimeout(() => {
-        this.router.navigate(['home/books/viewAllActiveBooks']);
+
+        this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+          this.router.navigate(['home/books/viewAllActiveBooks']);
+        });
       }, 3000);
 
     },

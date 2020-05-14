@@ -53,8 +53,23 @@ export class ViewAllBooksComponent implements OnInit {
       this.isbn = history.state.isbn;
       this.msgFlag = true;
       this.msg = "Book added to the collection successfully. Image tagged to ISBN";
+
+      setTimeout(() => {
+        this.msgFlag = false;
+      }, 6000);
+
     }
 
+    if (history.state.componentOrigin === "app-view-all-inactive-books") {
+      this.isbn = history.state.isbn;
+      this.msgFlag = true;
+      this.msg = "Book is now active";
+
+      setTimeout(() => {
+        this.msgFlag = false;
+      }, 6000);
+
+    }
   }
 
   applyFilter(event: Event) {

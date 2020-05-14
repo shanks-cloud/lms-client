@@ -28,7 +28,6 @@ export class AddBookComponent implements OnInit {
 
   dispIsbn: number;
 
-
   minDate = new Date();
   maxDate = new Date();
   endDate = this.maxDate.getUTCDate();
@@ -68,7 +67,11 @@ export class AddBookComponent implements OnInit {
     console.log(JSON.stringify(bookDTO));
 
     this.bookService.addBook(bookDTO).subscribe(data => {
-      this.router.navigate(['home/books/viewAllActiveBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: bookDTO.isbn } });
+
+      this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+        this.router.navigate(['home/books/viewAllActiveBooks'], { state: { newBook: true, componentOrigin: "app-add-book", isbn: bookDTO.isbn } });
+      });
+
     },
       (error: any) => console.log(error)
     );

@@ -1,50 +1,85 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { UserDTO } from '../model/UserDTO';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
 
   BASE_PATH: string = 'http://localhost:8080/home';
   USER_NAME_SESSION_ATTRIBUTE_NAME: string = 'authenticatedUser';
 
-  usrname: string;
+  eId: string;
   pswd: string;
+  token: string;
 
-  constructor(private http: HttpClient) { }
+  headers: HttpHeaders;
 
-  authenticationService(username: string, password: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Access-Control-Allow-Origin': '*',
-        'Authorization': this.createBasicAuthToken(username, password)
-      })
-    }
+  constructor(private http: HttpClient) {
+
+  }
+
+  authenticationService(userDTO: UserDTO) {
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Authorization': this.createBasicAuthToken(userDTO.emailId, userDTO.password)
+    //   })
+
+    console.log("inside authenticationService method..");
+
+    // this.headers = new HttpHeaders({
+    //   'Content-Type': 'application / json',
+    //   'Access- Control-Allow-Origin': '*'
+    // });
 
 
-    return this.http.get(this.BASE_PATH + '/' + "basicauth", httpOptions).pipe(map((resp) => {
-      this.usrname = username;
-      this.pswd = password;
-      this.registerSuccessfulLogin(username, password);
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.append('Accept', 'application/json');
+    this.headers = this.headers.append('Content-Type', 'application/json');
+    //this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+    this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
+
+    console.log("header before token generation is  " + JSON.stringify(this.headers));
+
+    this.token = this.createBasicAuthToken(userDTO.emailId, userDTO.password);
+    console.log("token is " + this.token);
+
+    this.headers = this.headers.append('Authorization', this.token);
+
+    console.log("header is " + JSON.stringify(this.headers));
+
+    // return this.http.post(this.BASE_PATH + '/' + "basicauth", userDTO, { headers: this.headers }).pipe(map((resp) => {
+    //   this.eId = userDTO.emailId;
+    //   this.pswd = userDTO.password;
+    //   this.registerSuccessfulLogin(userDTO.emailId, userDTO.password);
+    //   console.log("response is " + resp);
+    // }));
+
+    return this.http.post(this.BASE_PATH + '/' + "basicauth", userDTO, { headers: this.headers }).pipe(map((resp) => {
+      this.eId = userDTO.emailId;
+      this.pswd = userDTO.password;
+      this.registerSuccessfulLogin(userDTO.emailId, userDTO.password);
       console.log("response is " + resp);
     }));
-
   }
 
 
-  createBasicAuthToken(username: string, password: string) {
-    return 'Basic ' + window.btoa(username + ":" + password);
+  createBasicAuthToken(emailId: string, password: string) {
+    return 'Basic ' + window.btoa(emailId + ":" + password);
   }
 
-  registerSuccessfulLogin(username: string, password: string) {
-    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, username);
+  registerSuccessfulLogin(emailId: string, password: string) {
+    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, emailId);
   }
 
   logout() {
     sessionStorage.removeItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME);
-    this.usrname = null;
+    this.eId = null;
     this.pswd = null;
   }
 

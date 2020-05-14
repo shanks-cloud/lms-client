@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, NgForm } from '@angular/forms';
 import { MemberService } from '../../services/member.service';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { UserDTO } from '../../model/UserDTO';
+
 
 @Component({
   selector: 'app-pre-login',
@@ -15,6 +17,9 @@ export class PreLoginComponent implements OnInit {
   loginSuccess: boolean;
   successMessage: string;
 
+  userDTO: UserDTO;
+  loginForm: FormGroup;
+
 
   registerForm = new FormGroup({
     memberId: new FormControl(''),
@@ -25,15 +30,15 @@ export class PreLoginComponent implements OnInit {
   });
 
 
-  loginForm = new FormGroup({
-    emailId: new FormControl(''),
-    password: new FormControl('')
-  });
-
-
   constructor(private memberService: MemberService, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
+    this.loginForm = new FormGroup({
+      emailId: new FormControl(''),
+      password: new FormControl('')
+    });
+
   }
 
   onRegister() {
@@ -53,10 +58,21 @@ export class PreLoginComponent implements OnInit {
 
 
   onSignIn() {
-    this.authService.authenticationService(this.loginForm.get('emailId').value, this.loginForm.get('password').value).subscribe((data => {
-      this.router.navigate(['/home']);
-    }))
-  }
 
+    console.log("email id is " + this.loginForm.get('emailId').value);
+
+    // this.userDTO.emailId = this.loginForm.get('emailId').value;
+    // this.userDTO.password = this.loginForm.get('password').value;
+
+    this.userDTO = {
+      emailId: this.loginForm.get('emailId').value,
+      password: this.loginForm.get('password').value
+    };
+
+
+    this.authService.authenticationService(this.userDTO).subscribe((data) => {
+      this.router.navigate(['/home']);
+    });
+  }
 
 }
