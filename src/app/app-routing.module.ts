@@ -18,13 +18,14 @@ import { ProfileComponent } from './lms/components/profile/profile.component';
 import { HomeComponent } from './lms/components/home/home.component';
 import { PreLoginComponent } from './lms/components/pre-login/pre-login.component';
 import { DashboardComponent } from './lms/components/dashboard/dashboard.component';
+import { AuthguardService } from './lms/services/authguard.service';
 
 
 const routes: Routes = [
 
-  { path: 'profile', component: ProfileComponent },
   { path: '', component: PreLoginComponent },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthguardService] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthguardService] },
   //{ path: '**', component: PageNotFound }
 
   {
@@ -34,24 +35,24 @@ const routes: Routes = [
         path: 'books', component: SideNavComponent,
         children: [
           { path: '', redirectTo: 'viewAllActiveBooks', pathMatch: 'full' },
-          { path: 'addBook', component: AddBookComponent },
-          { path: 'viewAllActiveBooks', component: ViewAllBooksComponent },
-          { path: 'editBook/:isbn', component: EditBookComponent },
-          { path: 'archiveBook/:isbn', component: ArchiveBookComponent },
-          { path: 'viewAllInActiveBooks', component: ViewAllInactiveBooksComponent },
+          { path: 'addBook', component: AddBookComponent, canActivate: [AuthguardService] },
+          { path: 'viewAllActiveBooks', component: ViewAllBooksComponent, canActivate: [AuthguardService] },
+          { path: 'editBook/:isbn', component: EditBookComponent, canActivate: [AuthguardService] },
+          { path: 'archiveBook/:isbn', component: ArchiveBookComponent, canActivate: [AuthguardService] },
+          { path: 'viewAllInActiveBooks', component: ViewAllInactiveBooksComponent, canActivate: [AuthguardService] },
         ]
       },
       {
         path: 'catalog', component: SideNavComponent,
         children: [
           { path: '', redirectTo: 'viewAll', pathMatch: 'full' },
-          { path: 'viewAll', component: CatalogComponent },
-          { path: 'computerScience', component: ComputerScienceComponent },
-          { path: 'aviation', component: AviationComponent },
-          { path: 'medicalScience', component: MedicalScienceComponent },
-          { path: 'artAndLiving', component: ArtAndLivingComponent },
-          { path: 'astronomy', component: AstronomyComponent },
-          { path: 'philosophy', component: PhilosophyComponent },
+          { path: 'viewAll', component: CatalogComponent, canActivate: [AuthguardService] },
+          { path: 'computerScience', component: ComputerScienceComponent, canActivate: [AuthguardService] },
+          { path: 'aviation', component: AviationComponent, canActivate: [AuthguardService] },
+          { path: 'medicalScience', component: MedicalScienceComponent, canActivate: [AuthguardService] },
+          { path: 'artAndLiving', component: ArtAndLivingComponent, canActivate: [AuthguardService] },
+          { path: 'astronomy', component: AstronomyComponent, canActivate: [AuthguardService] },
+          { path: 'philosophy', component: PhilosophyComponent, canActivate: [AuthguardService] },
         ]
       },
     ]

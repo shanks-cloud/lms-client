@@ -30,7 +30,7 @@ import { BookService } from './lms/services/book.service';
 import { PreLoginComponent } from './lms/components/pre-login/pre-login.component';
 import { HttpInterceptorService } from './lms/services/httpInterceptor.service';
 import { AuthService } from './lms/services/auth.service';
-
+import { AuthguardService } from './lms/services/authguard.service';
 
 @NgModule({
   declarations: [
@@ -73,7 +73,7 @@ import { AuthService } from './lms/services/auth.service';
     MatIconModule,
     MatSlideToggleModule
   ],
-  providers: [BookService, MemberService, AuthService, [
+  providers: [BookService, MemberService, AuthService, AuthguardService, [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }
   ],
 

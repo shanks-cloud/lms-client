@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-// import { MatMenuTrigger } from '@angular/material';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -9,12 +10,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 export class TopBarComponent implements OnInit {
-  // @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  constructor() { }
+  constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
-    // this.trigger.openMenu();
+
+  }
+
+
+  logOut() {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 
 }

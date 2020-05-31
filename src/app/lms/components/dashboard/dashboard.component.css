@@ -4,3 +4,8 @@ mat-grid-tile {
     left: 20px;
     font-size: large;
 }
+
+mat-toolbar {
+    height:12px;
+}
+

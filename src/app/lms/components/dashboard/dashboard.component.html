@@ -1,19 +1,56 @@
-<mat-grid-list cols="2" rowHeight="100px">
+<mat-grid-list cols="3" rowHeight="100px">
     <mat-grid-tile>
+
+        <!-- <mat-toolbar></mat-toolbar> -->
+
         <mat-card>
-            <span style="font-size: x-small;">
+
+            <mat-card-content>
+
+
+                <div fxLayout="column" fxFlex="100" fxLayoutAlign="space-around center">
+
+                    <!-- <div fxLayout="row" style="background-color: blue;">test</div> -->
+
+                    <mat-toolbar style="background-color: blue;"></mat-toolbar>
+
+                    <span></span>
+
+                    <div fxLayout="row">New Arrivals</div>
+
+                    <span></span>
+
+                    <div fxLayout="row">{{newArrivalsCount}}</div>
+                </div>
+
+            </mat-card-content>
+
+
+
+
+
+            <!-- <span style="font-size: x-small;">
                 <b>New Arrivals</b>
-            </span>
+            </span> -->
 
-            <div></div>
+            <!-- <div></div> -->
 
-            <span style="font-size: large;">
+            <!-- <span style="font-size: large;">
                 {{newArrivalsCount}}
-            </span>
+            </span> -->
 
         </mat-card>
     </mat-grid-tile>
 
+    <mat-grid-tile>
+        <mat-card>
+            <span style="font-size: x-small;">
+                <b>New Members</b>
+            </span>
+
+            <div></div>
+        </mat-card>
+    </mat-grid-tile>
 
     <mat-grid-tile>
         <mat-card>

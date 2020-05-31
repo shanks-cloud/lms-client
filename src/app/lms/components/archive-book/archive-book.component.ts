@@ -39,7 +39,12 @@ export class ArchiveBookComponent implements OnInit {
       console.log("bookArchiveReason is.. " + bookArchiveReason);
 
       this.bookService.archiveBookByIsbn(this.isbn, bookArchiveReason).subscribe((data) => {
-        this.router.navigate(['home/books/viewAllInActiveBooks'], { state: { componentOrigin: "app-archive-book", isbn: this.isbn } });
+
+        this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+          this.router.navigate(['home/books/viewAllInActiveBooks'], { state: { componentOrigin: "app-archive-book", isbn: this.isbn } });
+        });
+
+
       },
         (error: any) => console.log(error)
       );
