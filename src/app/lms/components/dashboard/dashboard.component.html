@@ -1,64 +1,31 @@
 <mat-grid-list cols="3" rowHeight="100px">
     <mat-grid-tile>
-
-        <!-- <mat-toolbar></mat-toolbar> -->
-
         <mat-card>
-
             <mat-card-content>
-
-
-                <div fxLayout="column" fxFlex="100" fxLayoutAlign="space-around center">
-
-                    <!-- <div fxLayout="row" style="background-color: blue;">test</div> -->
-
-                    <mat-toolbar style="background-color: blue;"></mat-toolbar>
-
-                    <span></span>
-
-                    <div fxLayout="row">New Arrivals</div>
-
-                    <span></span>
-
-                    <div fxLayout="row">{{newArrivalsCount}}</div>
+                <div class="innerTxt">New Arrivals
+                    <div> {{newArrivalsCount}} </div>
                 </div>
-
             </mat-card-content>
-
-
-
-
-
-            <!-- <span style="font-size: x-small;">
-                <b>New Arrivals</b>
-            </span> -->
-
-            <!-- <div></div> -->
-
-            <!-- <span style="font-size: large;">
-                {{newArrivalsCount}}
-            </span> -->
-
         </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile>
         <mat-card>
-            <span style="font-size: x-small;">
-                <b>New Members</b>
-            </span>
-
-            <div></div>
+            <mat-card-content>
+                <div class="innerTxt">New Members
+                    <div> {{newMembersCount}} </div>
+                </div>
+            </mat-card-content>
         </mat-card>
     </mat-grid-tile>
 
     <mat-grid-tile>
         <mat-card>
-            <span style="font-size: x-small;">
-                <b>Current Outstanding</b>
-            </span>
-
-            <div></div>
+            <mat-card-content>
+                <div class="innerTxt">Current Outstanding
+                    <div> {{currentOutstanding}} </div>
+                </div>
+            </mat-card-content>
         </mat-card>
     </mat-grid-tile>
 </mat-grid-list>

@@ -5,7 +5,20 @@ mat-grid-tile {
     font-size: large;
 }
 
-mat-toolbar {
-    height:12px;
+mat-card{
+    background-color: #6200EE;
+    padding-left: 1px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-right: 1px;
+    height:58px;
+    width:120px;
 }
 
+.innerTxt {
+    background-color: white;
+    text-align: center;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    font-size: small;
+}
