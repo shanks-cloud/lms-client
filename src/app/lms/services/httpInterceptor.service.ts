@@ -15,7 +15,7 @@ export class HttpInterceptorService implements HttpInterceptor {
 
     console.log("inside interceptor method...");
 
-    if (this.authService.isUserLoggedIn && req.url.indexOf('basicauth') === -1) {
+    if (this.authService.isUserLoggedIn && req.url.indexOf('basicauth') === -1 && req.url.indexOf('Register') === -1) {
 
       console.log("inside interceptor if method...");
 

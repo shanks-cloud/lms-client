@@ -12,4 +12,6 @@ export class MemberDTO {
     zip: string;
     country: string;
     password: string;
+    enrollmentDate: String;
+    memberStatus: String;
 }

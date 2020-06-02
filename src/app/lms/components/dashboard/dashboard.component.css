@@ -11,14 +11,14 @@ mat-card{
     padding-top: 20px;
     padding-bottom: 0px;
     padding-right: 1px;
-    height:58px;
+    height:56px;
     width:120px;
 }
 
 .innerTxt {
     background-color: white;
     text-align: center;
-    border-bottom-right-radius: 6px;
-    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
     font-size: small;
 }

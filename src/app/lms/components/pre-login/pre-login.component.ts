@@ -44,7 +44,7 @@ export class PreLoginComponent implements OnInit {
   onRegister() {
     console.log("Registration form values...." + JSON.stringify(this.registerForm.value));
 
-    this.memberService.register(this.registerForm.value).subscribe((data) => {
+    this.authService.register(this.registerForm.value).subscribe((data) => {
       console.log("profile details saved sucessfully");
 
       this.invalidLogin = false;

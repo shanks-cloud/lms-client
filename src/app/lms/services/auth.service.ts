@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { UserDTO } from '../model/UserDTO';
+import { MemberDTO } from '../model/MemberDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,8 @@ import { UserDTO } from '../model/UserDTO';
 export class AuthService {
 
   BASE_PATH: string = 'http://localhost:8080/home';
+  memberUrl: string = 'http://localhost:8080/Member';
+
   USER_NAME_SESSION_ATTRIBUTE_NAME: string = 'authenticatedUser';
 
   eId: string;
@@ -22,20 +25,13 @@ export class AuthService {
 
   }
 
+  /*******************************************************************************/
+  /********************************** Login Service ******************************/
+  /*******************************************************************************/
+
   authenticationService(userDTO: UserDTO) {
-    // const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Authorization': this.createBasicAuthToken(userDTO.emailId, userDTO.password)
-    //   })
 
     console.log("inside authenticationService method..");
-
-    // this.headers = new HttpHeaders({
-    //   'Content-Type': 'application / json',
-    //   'Access- Control-Allow-Origin': '*'
-    // });
-
 
     this.headers = new HttpHeaders();
     this.headers = this.headers.append('Accept', 'application/json');
@@ -53,17 +49,10 @@ export class AuthService {
 
     console.log("header is " + JSON.stringify(this.headers));
 
-    // return this.http.post(this.BASE_PATH + '/' + "basicauth", userDTO, { headers: this.headers }).pipe(map((resp) => {
-    //   this.eId = userDTO.emailId;
-    //   this.pswd = userDTO.password;
-    //   this.registerSuccessfulLogin(userDTO.emailId, userDTO.password);
-    //   console.log("response is " + resp);
-    // }));
-
     return this.http.post(this.BASE_PATH + '/' + "basicauth", userDTO, { headers: this.headers }).pipe(map((resp) => {
       this.eId = userDTO.emailId;
       this.pswd = userDTO.password;
-      this.registerSuccessfulLogin(userDTO.emailId, userDTO.password);
+      this.successfulLogin(userDTO.emailId);
       console.log("response is " + resp);
     }));
   }
@@ -73,7 +62,7 @@ export class AuthService {
     return 'Basic ' + window.btoa(emailId + ":" + password);
   }
 
-  registerSuccessfulLogin(emailId: string, password: string) {
+  successfulLogin(emailId: string) {
     sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, emailId);
   }
 
@@ -94,4 +83,40 @@ export class AuthService {
     if (user === null) return '';
     return user;
   }
+
+  /*******************************************************************************/
+  /************************** Registration Service *******************************/
+  /*******************************************************************************/
+
+  register(memberDTO: MemberDTO) {
+
+    this.headers = new HttpHeaders();
+    this.headers = this.headers.append('Accept', 'application/json');
+    this.headers = this.headers.append('Content-Type', 'application/json');
+    //this.headers = this.headers.append('Access-Control-Allow-Origin', '*');
+    this.headers = this.headers.append('Access-Control-Allow-Origin', 'http://localhost:4200');
+    this.headers = this.headers.append('Access-Control-Allow-Credentials', 'true');
+
+    console.log("header before token generation is  " + JSON.stringify(this.headers));
+
+    this.token = this.createBasicAuthToken(memberDTO.emailId, memberDTO.password);
+    console.log("token is " + this.token);
+
+    this.headers = this.headers.append('Authorization', this.token);
+
+    console.log("header is " + JSON.stringify(this.headers));
+
+    return this.http.post(this.memberUrl + '/' + 'Register', memberDTO, { headers: this.headers }).pipe(map((resp) => {
+      this.eId = memberDTO.emailId;
+      this.pswd = memberDTO.password;
+      this.successfulRegistration(memberDTO.emailId);
+      console.log("response is " + resp);
+    }));
+  }
+
+
+  successfulRegistration(emailId: string) {
+    sessionStorage.setItem(this.USER_NAME_SESSION_ATTRIBUTE_NAME, emailId);
+  }
+
 }

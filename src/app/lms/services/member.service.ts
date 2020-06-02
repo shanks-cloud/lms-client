@@ -9,12 +9,12 @@ import { Observable } from 'rxjs';
 
 export class MemberService {
 
-  private registerUrl = 'http://localhost:8080/Register';
-  private signInUrl = 'http://localhost:8080/SignIn';
+  private memberUrl = 'http://localhost:8080/Member';
 
   constructor(private httpService: HttpClient) { }
 
-  register(memberDTO: MemberDTO): Observable<MemberDTO> {
-    return this.httpService.post<MemberDTO>(this.registerUrl, memberDTO);
+  getNewMembersCount(): Observable<number> {
+    return this.httpService.get<number>(this.memberUrl + '/' + 'newMembersCount');
   }
+
 }
