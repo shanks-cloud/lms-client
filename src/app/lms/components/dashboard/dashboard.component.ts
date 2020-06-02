@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
 
     this.getNewArrivalsCount();
+    this.getNewMembersCount();
 
   }
 
@@ -32,6 +33,7 @@ export class DashboardComponent implements OnInit {
 
   getNewMembersCount() {
     this.memberService.getNewMembersCount().subscribe((data) => {
+      console.log("new members count is " + data);
       this.newMembersCount = data;
     })
 
