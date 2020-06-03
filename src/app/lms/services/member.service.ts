@@ -17,4 +17,6 @@ export class MemberService {
     return this.httpService.get<number>(this.memberUrl + '/' + 'newMembersCount');
   }
 
+
+
 }

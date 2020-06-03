@@ -7,27 +7,36 @@
     width: 100%;
 }
 
-.registerAlignment{
-    margin-top: 30px;
-    margin-right: 60px;
-    margin-left: 400px;
-  
-}
-
-
 .loginAlignment{
-    margin-top: 170px;
-    margin-right: 60px;
-}
+    margin-top: 80px;
+    margin-right: 140px;
+    height: 110px;
+    width: 500px;
+    background-color: silver;
+}   
 
-.fixedButtonRegister {
-    position: absolute;
-    right: 60px;
-    bottom: 300px;
-}
 
 .regLbl{
     font-size: x-large;
     color: green;
-    background-color: darkgrey;
+    text-align: center;
+   
+}
+
+.msgDisplay {
+    margin-top: 2px;
+    margin-right: 350px;
+    margin-left: 200px;
+    font-size: small;
+    position:fixed;
+    white-space: nowrap;
+}
+
+.registerAlignment {
+    margin-top: 100px;
+    margin-right: 136px;
+    margin-left: 600px;
+    margin-bottom: 120px;
+    height: 220px;
+    background-color: silver;
 }
