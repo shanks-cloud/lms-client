@@ -1,12 +1,18 @@
+<mat-card *ngIf="msgFlag">
+    <mat-card-content class="alert alert-success"> {{msg}}
+        <div> <span class="isbn"> <b> isbn : {{isbn}} </b> </span> </div>
+    </mat-card-content>
+</mat-card>
+
+
 <div>
     <h1 align="center">Edit Book </h1>
 </div>
 
 
 <form #editForm="ngForm" *ngFor="let book of books">
+
     <mat-tab-group>
-
-
         <mat-tab>
             <mat-form-field>
                 <input matInput placeholder="ISBN" style="color: blue; font-weight: bold;" disabled minlength="13"
@@ -110,7 +116,7 @@
             &nbsp;
 
             <button type="button" class="btn btn-primary fixedbuttonsubmit" [disabled]="editForm.form.invalid"
-                (click)="onUpdate(editForm.value)"> Update </button>
+                (click)="onUpdate(editForm)"> Update </button>
         </mat-tab>
     </mat-tab-group>
 

@@ -3,16 +3,34 @@ mat-toolbar {
     display: flex;
 }
 
-
-mat-tab a {
-    font-style: normal;
-    font-size: medium;
+.register {
     color: white;
-    padding-right: 25px;
+    font-size: small;
 }
 
+.logout{
+    color: white;
+    font-size: small;
+}
+
+mat-toolbar-row a {
+    color: white;
+    padding: 6px;
+}
 
 img{
     width:50px;
     height:50px;
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+a {
+    color: white;
+}
+
+span {
+    padding-right: 4px;
 }

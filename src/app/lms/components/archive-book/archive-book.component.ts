@@ -6,16 +6,18 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { BookDTO } from '../../model/BookDTO';
 
 @Component({
-  selector: 'app-delete-book',
-  templateUrl: './delete-book.component.html',
-  styleUrls: ['./delete-book.component.css']
+  selector: 'app-archive-book',
+  templateUrl: './archive-book.component.html',
+  styleUrls: ['./archive-book.component.css']
 })
 
-export class DeleteBookComponent implements OnInit {
+export class ArchiveBookComponent implements OnInit {
 
   isbn: number;
   archiveBook: boolean;
   bookDTO: BookDTO;
+  msgFlag: boolean;
+  msg: String;
 
   constructor(public dialog: MatDialog, private route: ActivatedRoute, private bookService: BookService, private router: Router) {
 
@@ -37,10 +39,16 @@ export class DeleteBookComponent implements OnInit {
       console.log("bookArchiveReason is.. " + bookArchiveReason);
 
       this.bookService.archiveBookByIsbn(this.isbn, bookArchiveReason).subscribe((data) => {
-        this.router.navigate(['Books/viewAllInActiveBooks']);
+
+        this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+          this.router.navigate(['home/books/viewAllInActiveBooks'], { state: { componentOrigin: "app-archive-book", isbn: this.isbn } });
+        });
+
+
       },
         (error: any) => console.log(error)
       );
+
     });
   }
 }

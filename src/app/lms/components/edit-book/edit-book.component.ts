@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BookDTO } from '../../model/BookDTO';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-book',
@@ -19,6 +20,9 @@ export class EditBookComponent implements OnInit {
   bookImageName: String;
   bookArchiveReason: String;
   archiveFlag: boolean;
+  msgFlag: boolean;
+  bookDTO: BookDTO;
+  msg: String;
 
   minDate = new Date();
   maxDate = new Date();
@@ -28,6 +32,7 @@ export class EditBookComponent implements OnInit {
   constructor(private bookService: BookService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+
     this.categories = [
       "computerScience",
       "philosophy",
@@ -66,20 +71,35 @@ export class EditBookComponent implements OnInit {
     });
   }
 
-  onUpdate(bookDTO: BookDTO) {
+  // onUpdate(bookDTO: BookDTO) {
+
+  onUpdate(editForm: NgForm) {
+
+    this.bookDTO = editForm.value;
 
     this.edited = true;
-    bookDTO.isbn = this.isbn;
+    this.bookDTO.isbn = this.isbn;
 
-    bookDTO.bookImageName = this.bookImageName;
-    bookDTO.bookArchiveReason = this.bookArchiveReason;
-    bookDTO.archiveFlag = this.archiveFlag;
+    this.bookDTO.bookImageName = this.bookImageName;
+    this.bookDTO.bookArchiveReason = this.bookArchiveReason;
+    this.bookDTO.archiveFlag = this.archiveFlag;
 
-    this.bookService.updateBook(bookDTO, this.isbn).subscribe(data => {
-      this.router.navigate(['Books/viewAllActiveBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
+    this.bookService.updateBook(this.bookDTO, this.isbn).subscribe(data => {
+      // this.router.navigate(['Books/viewAllActiveBooks'], { state: { editBook: true, componentOrigin: "app-edit-book", isbn: this.isbn } });
 
-      setTimeout(function () {
-        location.reload();
+      this.msg = "Book edited successfully..";
+      this.msgFlag = true;
+
+      setTimeout(() => {
+        this.msgFlag = false;
+        editForm.reset();
+      }, 6000);
+
+      setTimeout(() => {
+
+        this.router.navigate(['dashboard'], { skipLocationChange: true }).then(() => {
+          this.router.navigate(['home/books/viewAllActiveBooks']);
+        });
       }, 3000);
 
     },
@@ -88,6 +108,6 @@ export class EditBookComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['Books/viewAllActiveBooks']);
+    this.router.navigate(['home/books/viewAllActiveBooks']);
   }
 }

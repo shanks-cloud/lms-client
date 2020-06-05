@@ -1,0 +1,139 @@
+<div class="centerImage">
+
+    <form [formGroup]="loginForm">
+        <mat-card class="loginAlignment" style="float: right;">
+            <mat-card-content>
+                <mat-form-field>
+                    <input matInput placeholder="email" formControlName="emailId" required>
+                </mat-form-field>
+
+                &nbsp;
+
+                <mat-form-field>
+                    <input matInput placeholder="password" formControlName="password" required>
+                </mat-form-field>
+
+                <div></div>
+
+                <button class="btn btn-primary" style="float: right;" type="submit" [disabled]="!loginForm.valid"
+                    (click)="onSignIn()">
+                    Sign in
+                </button>
+
+            </mat-card-content>
+        </mat-card>
+
+    </form>
+
+
+    <form [formGroup]="registerForm" style="float: right;">
+        <mat-card class="registerAlignment">
+
+
+            <h1> <span class="regLbl">New here? please register </span></h1>
+
+            <mat-card-content>
+
+                <mat-form-field>
+                    <input matInput placeholder="Firstname" formControlName="firstName" required />
+
+                    <mat-error *ngIf="firstName.errors?.required">
+                        Firstname is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.pattern">
+                        Enter a valid Firstname
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.minlength">
+                        Firstname should be a minimum of 4 characters
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.maxlength">
+                        Firstname can maximum upto 30 characters
+                    </mat-error>
+                </mat-form-field>
+
+                &nbsp;
+
+                <mat-form-field>
+                    <input matInput placeholder="Lastname" formControlName="lastName" required />
+
+                    <mat-error *ngIf="lastName.errors?.required">
+                        Lastname is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.pattern">
+                        Enter a valid Lastname
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.minlength">
+                        Lastname should be a minimum of 4 characters
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.maxlength">
+                        Lastname can maximum upto 30 characters
+                    </mat-error>
+
+                </mat-form-field>
+
+                <br>
+                <br>
+
+
+                <mat-form-field>
+                    <input matInput placeholder="Aadhaar #" formControlName="memberId" required />
+
+                    <mat-error *ngIf="memberId.errors?.required">
+                        Aadhaar is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.pattern">
+                        Aaadhar should be numeric type
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.minlength">
+                        minimum length should be 10 digits
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.maxlength">
+                        maximum length should be 10 digits
+                    </mat-error>
+                </mat-form-field>
+
+                &nbsp;
+
+                <mat-form-field>
+                    <input matInput placeholder="Email ID" (change)="findEmailId($event, registerForm.value)" required
+                        formControlName="emailId" />
+
+                    <mat-error *ngIf="emailId.errors?.required">
+                        Email ID is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="emailId.errors?.email">
+                        Please enter a valid email
+                    </mat-error>
+
+                </mat-form-field>
+
+                &nbsp;
+
+                <mat-form-field>
+                    <input matInput placeholder="Password" required formControlName="password" />
+                </mat-form-field>
+
+                <div *ngIf="foundFlag" class="text-danger msgDisplay"> {{msg}} </div>
+
+                <div></div>
+
+                <button class="btn btn-primary" style="float: right;" [disabled]="!registerForm.valid"
+                    (click)="onRegister()">
+                    Sign up </button>
+
+            </mat-card-content>
+
+        </mat-card>
+
+    </form>
+</div>

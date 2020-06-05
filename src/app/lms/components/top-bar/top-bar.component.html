@@ -1,25 +1,48 @@
-<!-- <p>top-bar works!</p> -->
-
 <mat-toolbar>
-
-       <mat-tab-group>
-
+       <mat-toolbar-row>
               <img src="/assets/images/digital-library.jpg">
 
-
               &nbsp;
               &nbsp;
 
+              <a [routerLink]="['/home']">
+                     <span class="glyphicon glyphicon-home"></span>
+              </a>
 
-              <mat-tab label="Catalog"> <a [routerLink]="['Catalog']">Catalog</a> </mat-tab>
+              <span> <a [routerLink]="['catalog']">Catalog</a> </span>
 
-              <mat-tab label="Books"> <a [routerLink]="['Books']">Books</a> </mat-tab>
+              <span> <a [routerLink]="['books/viewAllActiveBooks']"> Books</a> </span>
 
-              <mat-tab label="Members"> <a>Members</a> </mat-tab>
+              <span> <a>Members</a> </span>
 
-              <mat-tab label="Search Books"> <a>Search Books</a> </mat-tab>
+              <span> <a>Quick Search</a> </span>
 
-              <mat-tab label="Reports"> <a>Reports</a> </mat-tab>
-       </mat-tab-group>
+              <span> <a>Reports</a> </span>
 
+              <span class="spacer"></span>
+
+              <span> <a class="logout" (click)="logOut()"> Logout </a> </span>
+
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                     <mat-icon>more_vert</mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu">
+                     <mat-list>
+                            <mat-list-item>
+                                   <button mat-menu-item [routerLink]="['Profile']">
+                                          Profile
+                                   </button>
+                            </mat-list-item>
+
+                            <mat-divider></mat-divider>
+
+                            <mat-list-item>
+                                   <button mat-menu-item (click)="logOut()">
+                                          Logout
+                                   </button>
+                            </mat-list-item>
+                     </mat-list>
+              </mat-menu>
+       </mat-toolbar-row>
 </mat-toolbar>

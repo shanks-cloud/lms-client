@@ -1,0 +1,47 @@
+.centerImage{
+    background-image:url('/assets/images/ebboks.png');
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 730px;
+    width: 100%;
+}
+
+.loginAlignment{
+    margin-top: 80px;
+    margin-right: 140px;
+    height: 110px;
+    width: 500px;
+    background-color: silver;
+}   
+
+
+.regLbl{
+    font-size: x-large;
+    color: green;
+    text-align: center;
+   
+}
+
+.msgDisplay {
+    margin-top: 2px;
+    margin-right: 350px;
+    margin-left: 200px;
+    font-size: small;
+    position:fixed;
+    white-space: nowrap;
+}
+
+.registerAlignment {
+    margin-top: 100px;
+    margin-right: 136px;
+    margin-left: 600px;
+    margin-bottom: 120px;
+    height: 230px;
+    background-color: silver;
+}
+
+mat-error {
+    font-size: small;
+    width: 100%;
+}

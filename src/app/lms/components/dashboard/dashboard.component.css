@@ -4,3 +4,21 @@ mat-grid-tile {
     left: 20px;
     font-size: large;
 }
+
+mat-card{
+    background-color: #6200EE;
+    padding-left: 1px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    padding-right: 1px;
+    height:56px;
+    width:120px;
+}
+
+.innerTxt {
+    background-color: white;
+    text-align: center;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    font-size: small;
+}

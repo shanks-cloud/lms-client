@@ -1,4 +1,31 @@
-<mat-grid-list cols="2" rowHeight="100px">
-    <mat-grid-tile><b>New Arrivals: </b> &nbsp; &nbsp; {{newArrivalsCount}} </mat-grid-tile>
-    <mat-grid-tile><b>Current Outstanding</b></mat-grid-tile>
+<mat-grid-list cols="3" rowHeight="100px">
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-content>
+                <div class="innerTxt">New Arrivals
+                    <div> {{newArrivalsCount}} </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-content>
+                <div class="innerTxt">New Members
+                    <div> {{newMembersCount}} </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+        <mat-card>
+            <mat-card-content>
+                <div class="innerTxt">Current Outstanding
+                    <div> {{currentOutstanding}} </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-grid-tile>
 </mat-grid-list>
