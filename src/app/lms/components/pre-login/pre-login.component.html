@@ -35,22 +35,70 @@
             <mat-card-content>
 
                 <mat-form-field>
-                    <input matInput placeholder="Firstname" minlength="4" maxlength="30" pattern="[a-zA-Z ]*$" required
-                        formControlName="firstName" />
+                    <input matInput placeholder="Firstname" formControlName="firstName" required />
+
+                    <mat-error *ngIf="firstName.errors?.required">
+                        Firstname is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.pattern">
+                        Enter a valid Firstname
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.minlength">
+                        Firstname should be a minimum of 4 characters
+                    </mat-error>
+
+                    <mat-error *ngIf="firstName.errors?.maxlength">
+                        Firstname can maximum upto 30 characters
+                    </mat-error>
                 </mat-form-field>
 
                 &nbsp;
 
                 <mat-form-field>
-                    <input matInput placeholder="Lastname" minlength="4" maxlength="30" pattern="[a-zA-Z ]*$" required
-                        formControlName="lastName" />
+                    <input matInput placeholder="Lastname" formControlName="lastName" required />
+
+                    <mat-error *ngIf="lastName.errors?.required">
+                        Lastname is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.pattern">
+                        Enter a valid Lastname
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.minlength">
+                        Lastname should be a minimum of 4 characters
+                    </mat-error>
+
+                    <mat-error *ngIf="lastName.errors?.maxlength">
+                        Lastname can maximum upto 30 characters
+                    </mat-error>
+
                 </mat-form-field>
 
                 <br>
+                <br>
+
 
                 <mat-form-field>
-                    <input matInput placeholder="Aadhaar #" minlength=10 maxlength=10 pattern="[0-9]*" digitOnly
-                        required formControlName="memberId" />
+                    <input matInput placeholder="Aadhaar #" formControlName="memberId" required />
+
+                    <mat-error *ngIf="memberId.errors?.required">
+                        Aadhaar is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.pattern">
+                        Aaadhar should be numeric type
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.minlength">
+                        minimum length should be 10 digits
+                    </mat-error>
+
+                    <mat-error *ngIf="memberId.errors?.maxlength">
+                        maximum length should be 10 digits
+                    </mat-error>
                 </mat-form-field>
 
                 &nbsp;
@@ -58,6 +106,15 @@
                 <mat-form-field>
                     <input matInput placeholder="Email ID" (change)="findEmailId($event, registerForm.value)" required
                         formControlName="emailId" />
+
+                    <mat-error *ngIf="emailId.errors?.required">
+                        Email ID is mandatory
+                    </mat-error>
+
+                    <mat-error *ngIf="emailId.errors?.email">
+                        Please enter a valid email
+                    </mat-error>
+
                 </mat-form-field>
 
                 &nbsp;

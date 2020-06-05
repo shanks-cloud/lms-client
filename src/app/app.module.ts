@@ -27,7 +27,7 @@ import { DialogComponent } from './lms/components/dialog/dialog.component';
 
 import { MemberService } from './lms/services/member.service';
 import { BookService } from './lms/services/book.service';
-import { PreLoginComponent } from './lms/components/pre-login/pre-login.component';
+
 import { HttpInterceptorService } from './lms/services/httpInterceptor.service';
 import { AuthService } from './lms/services/auth.service';
 import { AuthguardService } from './lms/services/authguard.service';
@@ -39,7 +39,6 @@ import { AuthguardService } from './lms/services/authguard.service';
     DashboardComponent,
     DialogComponent,
     routingComponents,
-    PreLoginComponent,
 
   ],
   entryComponents: [DialogComponent],
@@ -47,6 +46,7 @@ import { AuthguardService } from './lms/services/authguard.service';
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+
 
     AppRoutingModule,
 

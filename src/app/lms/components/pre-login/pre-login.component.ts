@@ -3,39 +3,71 @@ import { FormGroup, FormControl, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UserDTO } from '../../model/UserDTO';
-import { MemberService } from '../../services/member.service';
-
 
 @Component({
   selector: 'app-pre-login',
   templateUrl: './pre-login.component.html',
   styleUrls: ['./pre-login.component.css']
 })
+
 export class PreLoginComponent implements OnInit {
 
   invalidLogin: boolean;
   loginSuccess: boolean;
   successMessage: string;
-  emailId: string;
+
   msg: string;
   foundFlag: boolean;
 
+  aadhaarPattern: string;
+  namePattern: string;
+
   userDTO: UserDTO;
+
   loginForm: FormGroup;
+  registerForm: FormGroup;
 
-
-  registerForm = new FormGroup({
-    memberId: new FormControl('', [Validators.required]),
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    emailId: new FormControl(''),
-    password: new FormControl('')
-  });
-
-
-  constructor(private authService: AuthService, private router: Router, private memberService: MemberService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
+    this.aadhaarPattern = "[0-9]*";
+    this.namePattern = "[a-zA-Z ]*$";
+
+
+    this.registerForm = new FormGroup({
+      memberId: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(10),
+          Validators.pattern(this.aadhaarPattern)
+        ]),
+
+      firstName: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.pattern(this.namePattern)
+        ]),
+
+      lastName: new FormControl('',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.maxLength(30),
+          Validators.pattern(this.namePattern)
+        ]),
+
+      emailId: new FormControl('',
+        [
+          Validators.required,
+          Validators.email
+        ]),
+
+      password: new FormControl('')
+    });
 
     this.loginForm = new FormGroup({
       emailId: new FormControl(''),
@@ -43,6 +75,23 @@ export class PreLoginComponent implements OnInit {
     });
 
   }
+
+  get memberId() {
+    return this.registerForm.get("memberId");
+  }
+
+  get firstName() {
+    return this.registerForm.get("firstName");
+  }
+
+  get lastName() {
+    return this.registerForm.get("lastName");
+  }
+
+  get emailId() {
+    return this.registerForm.get("emailId");
+  }
+
 
   onRegister() {
     console.log("Registration form values...." + JSON.stringify(this.registerForm.value));
@@ -85,18 +134,26 @@ export class PreLoginComponent implements OnInit {
       password: this.registerForm.get('password').value
     };
 
-    this.authService.fetchEmailId(this.userDTO).subscribe((data) => {
-      console.log("data is..." + JSON.stringify(data));
-      this.msg = "Email ID already exists !";
-      this.foundFlag = true;
 
+    if (event.target.value != '') {
 
-      setTimeout(() => {
-        this.foundFlag = false;
-        registerForm.reset();
-      }, 3000);
+      console.log("user DTO before calling fetchEmailId().. " + JSON.stringify(this.userDTO));
 
-    })
+      this.authService.fetchEmailId(this.userDTO).subscribe((data) => {
+        console.log("data is..." + JSON.stringify(data));
 
+        if (data != null) {
+          this.msg = "Email ID already exists !";
+          this.foundFlag = true;
+
+          setTimeout(() => {
+            this.foundFlag = false;
+            registerForm.reset;
+          }, 3000);
+
+        }
+
+      })
+    }
   }
 }

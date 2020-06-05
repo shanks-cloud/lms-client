@@ -123,7 +123,7 @@ export class AuthService {
   /************************** check email for duplicate *******************************/
   /************************************************************************************/
 
-  fetchEmailId(userDTO: UserDTO) {
+  fetchEmailId(userDTO: UserDTO): Observable<UserDTO> {
 
     this.headers = new HttpHeaders();
     this.headers = this.headers.append('Accept', 'application/json');
@@ -142,9 +142,8 @@ export class AuthService {
 
     console.log("header is " + JSON.stringify(this.headers));
 
-    return this.http.post(this.memberUrl + '/' + 'fetchMember', userDTO, { headers: this.headers }).pipe(map((resp) => {
-      console.log("response is " + resp);
-    }));
+    return this.http.get<UserDTO>(this.memberUrl + '/' + 'fetchMember' + '/' + userDTO.emailId, { headers: this.headers });
+
   }
 
 

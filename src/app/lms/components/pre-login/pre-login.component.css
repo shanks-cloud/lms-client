@@ -37,6 +37,11 @@
     margin-right: 136px;
     margin-left: 600px;
     margin-bottom: 120px;
-    height: 220px;
+    height: 230px;
     background-color: silver;
+}
+
+mat-error {
+    font-size: small;
+    width: 100%;
 }
