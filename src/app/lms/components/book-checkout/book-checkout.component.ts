@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort } from '@angular/material';
 
 
+
 interface BookNode {
   name?: String;
   children?: BookNode[];
@@ -28,6 +29,7 @@ export class BookCheckoutComponent implements OnInit {
 
   fullName: String;
 
+  tempArr = [];
   selectedBookOptions = [];
   selectedMemberOptions = [];
   displayedColumns = [];
@@ -48,8 +50,9 @@ export class BookCheckoutComponent implements OnInit {
 
   ]
 
-  FINAL_TREE_DATA = [];
-  merged_object = [];
+  FINAL_TREE_DATA = [
+
+  ]
 
 
   // treeControl = new NestedTreeControl<FoodNode>(node => node.children);
@@ -114,13 +117,14 @@ export class BookCheckoutComponent implements OnInit {
   showSelectedBooks(val: string) {
 
     if (this.selectedBookOptions.length < 2) {
-      this.selectedBookOptions.push({ 'isbn': val });
-      console.log("checkbox value after pushing.." + this.bookCheckedFlag);
+      //this.selectedBookOptions.push({ 'isbn': val });
+      this.selectedBookOptions.push(val);
+
       console.log("selected Book options " + JSON.stringify(this.selectedBookOptions));
     } else {
       this.bookRestrictFlag = true;
-
     }
+
   }
 
   populateMemberTree() {
@@ -146,8 +150,11 @@ export class BookCheckoutComponent implements OnInit {
 
   showSelectedMembers(val: string) {
     if (this.selectedMemberOptions.length < 1) {
-      this.selectedMemberOptions.push({ 'memberId': val });
+      //this.selectedMemberOptions.push({ 'memberId': val });
+      this.selectedMemberOptions.push(val);
+
       console.log("selected Member options " + JSON.stringify(this.selectedMemberOptions));
+
     } else {
       this.memberRestrictFlag = true;
 
@@ -167,13 +174,12 @@ export class BookCheckoutComponent implements OnInit {
     // this.displayedColumns = ['bookCategory', 'bookTitle', 'isbn', 'memberId'];
     this.displayedColumns = ['isbn', 'memberId'];
 
-    console.log("selected book options are... " + JSON.stringify(this.selectedBookOptions));
-    console.log("selected member options are.." + JSON.stringify(this.selectedMemberOptions));
+    this.tempArr.push({ "isbn": this.selectedBookOptions, "memberId": this.selectedMemberOptions });
+    this.FINAL_TREE_DATA = this.tempArr;
 
-    var merged_object = this.selectedBookOptions.concat(this.selectedMemberOptions);
+    console.log("final tree data is " + JSON.stringify(this.FINAL_TREE_DATA));
 
-    console.log("final tree data is " + JSON.stringify(merged_object));
-    this.bookCheckOutDataSource = new MatTableDataSource(merged_object);
+    this.bookCheckOutDataSource = new MatTableDataSource(this.FINAL_TREE_DATA);
   }
 
 
