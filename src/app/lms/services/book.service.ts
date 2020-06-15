@@ -54,4 +54,10 @@ export class BookService {
   getNewArrivalsCount(): Observable<number> {
     return this.httpService.get<number>(this.bookUrl + '/' + 'newArrivalsCount');
   }
+
+  getAllActiveBooks(): Observable<BookDTO[]> {
+    return this.httpService.get<BookDTO[]>(this.bookUrl + '/' + 'allActiveBooks');
+  }
+
+
 }

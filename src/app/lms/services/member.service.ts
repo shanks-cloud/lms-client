@@ -17,6 +17,8 @@ export class MemberService {
     return this.httpService.get<number>(this.memberUrl + '/' + 'newMembersCount');
   }
 
-
+  getAllMembers(): Observable<MemberDTO[]> {
+    return this.httpService.get<MemberDTO[]>(this.memberUrl + '/' + 'fetchAllMembers');
+  }
 
 }

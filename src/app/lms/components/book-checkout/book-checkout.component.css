@@ -1,0 +1,74 @@
+.example-tree-invisible {
+    display: none;
+}
+  
+  .example-tree ul,
+  .example-tree li {
+     list-style-type: none;
+  }
+
+
+  mat-grid-list{
+    width:1200px;
+  }
+
+ mat-grid-tile{
+  padding-top: 380px !important;
+  height:350px;
+ }
+
+ mat-grid-tile-header{
+  justify-content: center;
+  width:400px;
+  margin-top: 20px;
+}
+  
+ mat-grid-tile mat-grid-tile-header {
+  margin-left: 20px;
+  background-color: darkcyan;
+ }
+ 
+ 
+ mat-tree-node {
+    min-height: 0px !important;
+    height: 20px !important;
+ }
+
+
+ mat-nested-tree-node {
+   white-space: nowrap;
+ }
+
+
+ mat-tree {
+    width:400px;
+    height:300px;
+    margin-left: 20px;
+    margin-top:55px;
+ }
+
+ 
+ .bookTree {
+    overflow-y: scroll;
+    height: 300px;
+  }
+
+  .memberTree {
+    overflow-y: scroll;
+    height: 300px;
+  }
+
+  mat-card{
+    width: 200px;
+    text-align:center;
+  }
+
+  table {
+    width: 61%;
+    margin-right: auto;
+  }
+
+  
+
+
+  

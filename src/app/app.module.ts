@@ -12,7 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
-import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule, MatDialogModule, MAT_RADIO_DEFAULT_OPTIONS, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DATE_LOCALE, MatMenuModule, MatIconModule, MatSlideToggleModule } from '@angular/material';
+import { MatSidenavModule, MatDividerModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule, MatRadioModule, MatGridListModule, MatToolbarModule, MatDialogModule, MAT_RADIO_DEFAULT_OPTIONS, MAT_DIALOG_DEFAULT_OPTIONS, MAT_DATE_LOCALE, MatMenuModule, MatIconModule, MatSlideToggleModule, MatTreeModule, MatCheckboxModule } from '@angular/material';
 import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
@@ -39,6 +39,7 @@ import { AuthguardService } from './lms/services/authguard.service';
     DashboardComponent,
     DialogComponent,
     routingComponents,
+
 
   ],
   entryComponents: [DialogComponent],
@@ -71,7 +72,10 @@ import { AuthguardService } from './lms/services/authguard.service';
     MatDialogModule,
     MatMenuModule,
     MatIconModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTreeModule,
+    MatCheckboxModule
+
   ],
   providers: [BookService, MemberService, AuthService, AuthguardService, [
     { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: { hasBackdrop: false } }

@@ -19,6 +19,7 @@ import { HomeComponent } from './lms/components/home/home.component';
 import { PreLoginComponent } from './lms/components/pre-login/pre-login.component';
 import { DashboardComponent } from './lms/components/dashboard/dashboard.component';
 import { AuthguardService } from './lms/services/authguard.service';
+import { BookCheckoutComponent } from './lms/components/book-checkout/book-checkout.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,7 @@ const routes: Routes = [
           { path: 'editBook/:isbn', component: EditBookComponent, canActivate: [AuthguardService] },
           { path: 'archiveBook/:isbn', component: ArchiveBookComponent, canActivate: [AuthguardService] },
           { path: 'viewAllInActiveBooks', component: ViewAllInactiveBooksComponent, canActivate: [AuthguardService] },
+          { path: 'checkoutBook', component: BookCheckoutComponent, canActivate: [AuthguardService] }
         ]
       },
       {
@@ -84,5 +86,6 @@ export const routingComponents = [
   ProfileComponent,
   HomeComponent,
   PreLoginComponent,
-  DashboardComponent
+  DashboardComponent,
+  BookCheckoutComponent
 ]

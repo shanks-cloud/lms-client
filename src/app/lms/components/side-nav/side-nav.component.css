@@ -28,6 +28,9 @@ mat-slide-toggle {
     font-size: x-large;
 }
 
+mat-icon{
+    font-size: xx-large;
+}
 
 a {
     font-weight: normal;
