@@ -5,6 +5,7 @@ import { BookService } from '../../services/book.service';
 import { MemberService } from '../../services/member.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort } from '@angular/material';
+import { BookCheckoutDTO } from '../../model/BookCheckoutDTO';
 
 
 
@@ -39,6 +40,7 @@ export class BookCheckoutComponent implements OnInit {
   bookCheckedFlag: boolean;
   memberCheckedFlag: boolean;
   showTblFlag: boolean;
+  bookMemberSelection: boolean;
 
   dataSource: MatTableDataSource<any>;
 
@@ -54,6 +56,7 @@ export class BookCheckoutComponent implements OnInit {
 
   ]
 
+  bookCheckoutDTO = new BookCheckoutDTO;
 
   // treeControl = new NestedTreeControl<FoodNode>(node => node.children);
   treeControl = new NestedTreeControl<BookNode>(node => node.children);
@@ -71,6 +74,7 @@ export class BookCheckoutComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.bookMemberSelection = false;
     this.populateBookTree();
     this.populateMemberTree();
 
@@ -170,16 +174,70 @@ export class BookCheckoutComponent implements OnInit {
 
 
   showTable() {
-    this.showTblFlag = true;
-    // this.displayedColumns = ['bookCategory', 'bookTitle', 'isbn', 'memberId'];
-    this.displayedColumns = ['isbn', 'memberId'];
 
-    this.tempArr.push({ "isbn": this.selectedBookOptions, "memberId": this.selectedMemberOptions });
-    this.FINAL_TREE_DATA = this.tempArr;
+    if ((this.selectedBookOptions.length == 2 || this.selectedBookOptions.length == 1) && (this.selectedMemberOptions.length == 1)) {
+      this.bookMemberSelection = true;
 
-    console.log("final tree data is " + JSON.stringify(this.FINAL_TREE_DATA));
+      this.showTblFlag = true;
+      this.displayedColumns = ['isbn', 'memberId', 'firstName', 'lastName'];
 
-    this.bookCheckOutDataSource = new MatTableDataSource(this.FINAL_TREE_DATA);
+      this.memberService.getAllMembers().subscribe((data) => {
+        data.forEach((element) => {
+
+          this.selectedMemberOptions.forEach((ele) => {
+
+            if (element.memberId == ele) {
+
+              this.tempArr.push(
+                {
+                  "isbn": this.selectedBookOptions,
+                  "memberId": this.selectedMemberOptions,
+                  "firstName": element.firstName,
+                  "lastName": element.lastName
+                });
+              this.FINAL_TREE_DATA = this.tempArr;
+
+              console.log("final tree data is " + JSON.stringify(this.FINAL_TREE_DATA));
+
+              this.bookCheckOutDataSource = new MatTableDataSource(this.FINAL_TREE_DATA);
+            }
+          })
+        })
+      })
+    }
+  }
+
+
+  onConfirm() {
+
+    this.bookCheckoutDTO.isbn = [];
+
+    this.selectedBookOptions.forEach((element) => {
+      console.log("element value is " + element);
+      this.bookCheckoutDTO.isbn.push(parseInt(element));
+      console.log("bookCheckoutDTO's isbn values are.. " + this.bookCheckoutDTO.isbn);
+    })
+
+    this.selectedMemberOptions.forEach((element) => {
+      this.bookCheckoutDTO.memberID = parseInt(element);
+      console.log("bookCheckoutDTO's member values are.. " + this.bookCheckoutDTO.memberID);
+    })
+
+
+    this.FINAL_TREE_DATA.forEach((element) => {
+
+      console.log("element.firstName is " + element.firstName);
+      this.bookCheckoutDTO.firstName = element.firstName;
+
+      console.log("element.lastName is " + element.lastName);
+      this.bookCheckoutDTO.lastName = element.lastName;
+
+    })
+
+    this.bookService.checkoutBook(this.bookCheckoutDTO).subscribe((data) => {
+      console.log("Book checked-out data is " + JSON.stringify(data));
+    })
+
   }
 
 

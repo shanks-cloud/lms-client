@@ -4,6 +4,7 @@ import { Observable, pipe } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AuthService } from './auth.service';
+import { BookCheckoutDTO } from '../model/BookCheckoutDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +58,11 @@ export class BookService {
 
   getAllActiveBooks(): Observable<BookDTO[]> {
     return this.httpService.get<BookDTO[]>(this.bookUrl + '/' + 'allActiveBooks');
+  }
+
+  checkoutBook(checkoutData: BookCheckoutDTO): Observable<BookCheckoutDTO> {
+    return this.httpService.post<BookCheckoutDTO>(this.bookUrl + '/' + 'BookCheckout', checkoutData);
+
   }
 
 

@@ -116,7 +116,7 @@
             <button class="btn btn-primary" (click)="onReset()">Reset</button>
             <br>
             <br>
-            <button class="btn btn-primary" (click)="showTable()">Apply</button>
+            <button class="btn btn-primary" [disabled]="bookMemberSelection" (click)="showTable()">Apply</button>
 
         </mat-card>
 
@@ -125,17 +125,6 @@
 
 <form #bookChkOutFrm="ngForm" *ngIf="showTblFlag">
     <table mat-table [dataSource]="bookCheckOutDataSource" matSort class="mat-elevation-z8">
-        <!-- Book Category Column -->
-        <!-- <ng-container matColumnDef="bookCategory">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef> Book Category </th>
-            <td mat-cell *matCellDef="let element"> {{element.bookCategory}} </td>
-        </ng-container> -->
-
-        <!-- Book Title Column -->
-        <!-- <ng-container matColumnDef="bookTitle">
-            <th mat-header-cell mat-sort-header *matHeaderCellDef> Book Title </th>
-            <td mat-cell *matCellDef="let element"> {{element.bookTitle}} </td>
-        </ng-container> -->
 
         <!-- ISBN Column -->
         <ng-container matColumnDef="isbn">
@@ -149,7 +138,30 @@
             <td mat-cell *matCellDef="let element"> {{element.memberId}} </td>
         </ng-container>
 
+        <!-- Firstname Column -->
+        <ng-container matColumnDef="firstName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Firstname </th>
+            <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+        </ng-container>
+
+
+        <!-- Lastname Column -->
+        <ng-container matColumnDef="lastName">
+            <th mat-header-cell mat-sort-header *matHeaderCellDef> Lastname </th>
+            <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+        </ng-container>
+
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row (click)="showDetails(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+
+    &nbsp;
+    &nbsp;
+
+    <button class="btn btn-primary cancelButton" (click)="onCancel()">Cancel</button>
+    &nbsp;
+    &nbsp;
+    <button class="btn btn-primary confirmButton" (click)="onConfirm()">Confirm</button>
+
 </form>
