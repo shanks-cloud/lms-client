@@ -1,7 +1,16 @@
 <!-- <p>book-checkout works!</p> -->
 
+<form #msgForm="ngForm">
+    <div>
+        <mat-card class="topMsg" *ngIf="msgFlag">
+            <mat-card-content alert alert-success>
+                {{msg}}
+            </mat-card-content>
+        </mat-card>
+    </div>
+</form>
 
-<mat-grid-list cols="3">
+<mat-grid-list cols="3" rowHeight="12px">
 
     <mat-grid-tile>
         <mat-grid-tile-header> Books </mat-grid-tile-header>
@@ -111,12 +120,13 @@
     <mat-grid-tile>
 
 
-        <mat-card>
+        <mat-card class="cardWidth">
 
-            <button class="btn btn-primary" (click)="onReset()">Reset</button>
+            <button class="btn btn-primary btnWidth" (click)="onReset()">Reset</button>
             <br>
             <br>
-            <button class="btn btn-primary" [disabled]="bookMemberSelection" (click)="showTable()">Apply</button>
+            <button class="btn btn-primary btnWidth" [disabled]="bookMemberSelection"
+                (click)="showTable()">Apply</button>
 
         </mat-card>
 
@@ -162,6 +172,6 @@
     <button class="btn btn-primary cancelButton" (click)="onCancel()">Cancel</button>
     &nbsp;
     &nbsp;
-    <button class="btn btn-primary confirmButton" (click)="onConfirm()">Confirm</button>
+    <button class="btn btn-primary confirmButton" (click)="onConfirm(msgForm.value)">Confirm</button>
 
 </form>

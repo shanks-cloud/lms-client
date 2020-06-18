@@ -30,15 +30,16 @@ mat-slide-toggle {
 
 mat-icon{
     font-size: xx-large;
-    color:black;
+    color:purple;
+    padding-top: 10px !important;
 }
 
 a {
     font-weight: normal;
     padding: 10px 5px;
-    font-size: .80em;
+    font-size: large;
     color: white
-  }
+}
 
 
 .thumbnail img{
@@ -51,4 +52,9 @@ a {
 img {
     height: 35px;
     width: 35px;
+}
+
+span{
+    margin-left:10px;
+    
 }

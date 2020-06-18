@@ -4,21 +4,24 @@
         <!-- Sidenav content -->
         <mat-list *ngIf="url==='books'">
             <mat-list-item>
-                <a [routerLink]="['addBook']"> <img src="\assets\images\addBook.png" />
-                    <span style="color: white;"> Add Book </span>
+                <a [routerLink]="['addBook']">
+                    <mat-icon>library_add</mat-icon>
+                    <span>Add Book</span>
                 </a>
             </mat-list-item>
             <br>
             <br>
             <mat-list-item>
-                <a [routerLink]="['viewAllActiveBooks']"> <img src="\assets\images\allBooks.png" />
-                    <span style="color: white;"> Active Books </span>
+                <a [routerLink]="['viewAllActiveBooks']">
+                    <mat-icon>local_library</mat-icon>
+                    <span>View Books</span>
                 </a>
             </mat-list-item>
             <br>
             <br>
             <mat-list-item> <a [routerLink]="['checkoutBook']">
-                    <mat-icon>local_grocery_store</mat-icon>&nbsp;Checkout Book
+                    <mat-icon>local_grocery_store</mat-icon>
+                    <span>Checkout Book</span>
                 </a></mat-list-item>
             <br>
             <br>

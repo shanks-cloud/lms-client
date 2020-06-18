@@ -7,14 +7,15 @@
      list-style-type: none;
   }
 
-
   mat-grid-list{
     width:1200px;
+    padding-top: 380px;
   }
 
  mat-grid-tile{
   padding-top: 380px !important;
   height:350px;
+  
  }
 
  mat-grid-tile-header{
@@ -45,10 +46,17 @@
     height:300px;
     margin-left: 20px;
     margin-top:55px;
- }
+  }
 
- 
- .bookTree {
+  mat-card-content {
+    text-align: center;
+  }
+
+  .topMsg{
+    background-color: lightcyan;
+  }
+
+  .bookTree {
     overflow-y: scroll;
     height: 300px;
   }
@@ -58,13 +66,18 @@
     height: 300px;
   }
 
-  mat-card{
-    width: 200px;
+  .cardWidth{
+    width: 130px;
+  }
+
+  .btnWidth{
+    width: 100px;
     text-align:center;
   }
 
   table {
     width: 60%;
+    height:80px;
     margin-right: auto;
     margin-left: 20px;
     margin-bottom: 20px;

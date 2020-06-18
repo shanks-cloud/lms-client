@@ -6,6 +6,7 @@ import { MemberService } from '../../services/member.service';
 import { Router } from '@angular/router';
 import { MatTableDataSource, MatSort } from '@angular/material';
 import { BookCheckoutDTO } from '../../model/BookCheckoutDTO';
+import { NgForm } from '@angular/forms';
 
 
 
@@ -29,6 +30,7 @@ interface MemberNode {
 export class BookCheckoutComponent implements OnInit {
 
   fullName: String;
+  msg: String;
 
   tempArr = [];
   selectedBookOptions = [];
@@ -41,6 +43,7 @@ export class BookCheckoutComponent implements OnInit {
   memberCheckedFlag: boolean;
   showTblFlag: boolean;
   bookMemberSelection: boolean;
+  msgFlag: boolean;
 
   dataSource: MatTableDataSource<any>;
 
@@ -208,7 +211,7 @@ export class BookCheckoutComponent implements OnInit {
   }
 
 
-  onConfirm() {
+  onConfirm(msgForm: NgForm) {
 
     this.bookCheckoutDTO.isbn = [];
 
@@ -236,7 +239,15 @@ export class BookCheckoutComponent implements OnInit {
     console.log("bookCheckOutDTO is " + JSON.stringify(this.bookCheckoutDTO));
 
     this.bookService.checkoutBook(this.bookCheckoutDTO).subscribe((data) => {
-      console.log("Book checked-out data is " + JSON.stringify(data));
+      console.log("Book checked-out details.." + JSON.stringify(data));
+      this.msgFlag = true;
+      this.msg = "Book cheecked-out successfully..";
+
+      setTimeout(() => {
+        this.msgFlag = false;
+        msgForm.reset;
+        this.onReset();
+      }, 4000);
     })
 
   }
