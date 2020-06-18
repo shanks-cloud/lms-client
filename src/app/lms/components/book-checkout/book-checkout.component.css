@@ -67,17 +67,19 @@
     width: 60%;
     margin-right: auto;
     margin-left: 20px;
+    margin-bottom: 20px;
   }
 
   .mat-header-row {
     background-color: darkcyan;
   }
 
-  th {
-    color: white !important;
+  th.mat-header-cell {
+    color: white;
+    font-size: 14px;
   }
 
-  .confirmButton {
+   .confirmButton {
     position: fixed;
     bottom: 10px;
     right: 20px;

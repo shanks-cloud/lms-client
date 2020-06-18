@@ -64,7 +64,7 @@ export class AddBookComponent implements OnInit {
     bookDTO.bookCopies = 0;
 
 
-    console.log(JSON.stringify(bookDTO));
+    console.log("bookDTO is " + JSON.stringify(bookDTO));
 
     this.bookService.addBook(bookDTO).subscribe(data => {
 

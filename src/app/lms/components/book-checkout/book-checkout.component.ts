@@ -219,10 +219,9 @@ export class BookCheckoutComponent implements OnInit {
     })
 
     this.selectedMemberOptions.forEach((element) => {
-      this.bookCheckoutDTO.memberID = parseInt(element);
-      console.log("bookCheckoutDTO's member values are.. " + this.bookCheckoutDTO.memberID);
+      this.bookCheckoutDTO.memberId = parseInt(element);
+      console.log("bookCheckoutDTO's member values are.. " + this.bookCheckoutDTO.memberId);
     })
-
 
     this.FINAL_TREE_DATA.forEach((element) => {
 
@@ -233,6 +232,8 @@ export class BookCheckoutComponent implements OnInit {
       this.bookCheckoutDTO.lastName = element.lastName;
 
     })
+
+    console.log("bookCheckOutDTO is " + JSON.stringify(this.bookCheckoutDTO));
 
     this.bookService.checkoutBook(this.bookCheckoutDTO).subscribe((data) => {
       console.log("Book checked-out data is " + JSON.stringify(data));
