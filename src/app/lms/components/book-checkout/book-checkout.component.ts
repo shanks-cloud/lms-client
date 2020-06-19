@@ -90,7 +90,6 @@ export class BookCheckoutComponent implements OnInit {
 
       console.log("data is " + JSON.stringify(data));
 
-
       data.forEach((element) => {
 
         // if (this.BOOK_TREE_DATA.length > 0) {
@@ -103,17 +102,20 @@ export class BookCheckoutComponent implements OnInit {
 
         // }
 
-        this.BOOK_TREE_DATA.push({
-          'name': element.bookCategory,
-          'children': [
-            {
-              'name': element.bookTitle,
-              'children': [
-                { 'name': JSON.stringify(element.isbn) }
-              ]
-            }
-          ]
-        });
+        if (!element.checkOutStatus) {
+
+          this.BOOK_TREE_DATA.push({
+            'name': element.bookCategory,
+            'children': [
+              {
+                'name': element.bookTitle,
+                'children': [
+                  { 'name': JSON.stringify(element.isbn) }
+                ]
+              }
+            ]
+          });
+        };
       });
 
       console.log("tree data is.. " + JSON.stringify(this.BOOK_TREE_DATA));
@@ -135,6 +137,8 @@ export class BookCheckoutComponent implements OnInit {
   }
 
   populateMemberTree() {
+
+
     this.memberService.getAllMembers().subscribe((data) => {
       data.forEach((element) => {
 
@@ -152,6 +156,7 @@ export class BookCheckoutComponent implements OnInit {
 
       this.dataSourceMemberNode.data = this.MEMBER_TREE_DATA;
     })
+
   }
 
 

@@ -3,4 +3,5 @@ export class BookCheckoutDTO {
     memberId: number;
     firstName: string;
     lastName: string;
+    checkoutDate: string;
 }

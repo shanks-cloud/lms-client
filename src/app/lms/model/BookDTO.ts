@@ -12,4 +12,5 @@ export class BookDTO {
     bookPrice: number;
     bookCopies: number;
     pageCount: number;
+    checkOutStatus: boolean;
 }
